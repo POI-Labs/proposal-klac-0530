@@ -1,0 +1,3012 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률구조서비스 플랫폼 One-Stop 법률똑똑이 개선 제안서 | 자치법연구원 X 포이</title>
+    <style>
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Paperlogy-8ExtraBold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Pretendard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        :root {
+            --primary-color: #1a5490;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --dark-bg: #1a1a2e;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-logos img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            /* GPU 가속 및 레이어 분리 */
+            will-change: transform;
+            /* 성능 최적화 */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+            background-size: cover;
+            animation: wave 20s linear infinite;
+            transform: translateZ(0);
+            /* GPU 가속 */
+            will-change: transform;
+            /* 성능 최적화 */
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--text-light);
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .policy-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .policy-badge span:first-child {
+            font-weight: 600;
+            padding-right: 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .proposer-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .proposer {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .proposer img {
+            height: 30px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--text-light);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Overview Section - 스크롤 시 안정성을 위한 설정 추가 */
+        .overview {
+            position: relative;
+            z-index: 10;
+            background: white;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Current Status Section */
+        .current-status {
+            background: var(--light-bg);
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .status-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .status-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .status-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .status-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .status-card li::before {
+            content: "❌";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Solution Section */
+        .solution {
+            background: white;
+        }
+
+        .solution-approach {
+            margin-bottom: 4rem;
+        }
+
+        .solution-approach h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .approach-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .approach-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .approach-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .approach-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .approach-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .approach-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .approach-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+        }
+
+        .approach-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .data-enhancement {
+            margin: 4rem 0;
+        }
+
+        .data-enhancement h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .enhancement-table {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        .enhancement-table table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .enhancement-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .enhancement-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .enhancement-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .enhancement-table strong {
+            color: var(--primary-color);
+        }
+
+        .expected-improvements {
+            margin-top: 4rem;
+        }
+
+        .expected-improvements h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .improvement-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Example Section */
+        .example {
+            background: var(--light-bg);
+        }
+
+        /* Comparison Section Styles */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chat-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-title {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 기본 채팅 스타일 */
+        .chat-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .chat-header h4 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            padding: 2rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            background: #f1f1f1;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            max-width: 85%;
+        }
+
+        .message.user .message-bubble {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .message.user .message-label {
+            display: none;
+        }
+
+        .chat-container.current {
+            box-shadow: 0 10px 40px rgba(231, 76, 60, 0.1);
+        }
+
+        .chat-container.improved {
+            box-shadow: 0 10px 40px rgba(52, 152, 219, 0.1);
+        }
+
+        .current-header {
+            background: #e74c3c;
+        }
+
+        .chat-container.current .message.ai .message-bubble {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .chat-container.improved .message.ai .message-bubble {
+            background: #e8f0fe;
+        }
+
+        .info-box {
+            background: #d4edda;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .info-box.secondary {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .action-box {
+            background: #e8f0fe;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #2196F3;
+        }
+
+        .contact-box {
+            background: #f8d7da;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+            border: 2px solid #e74c3c;
+        }
+
+        .comparison-issues,
+        .comparison-improvements {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .comparison-issues {
+            background: #fee;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .comparison-improvements {
+            background: #e8f8ff;
+            border-left: 4px solid #2196F3;
+        }
+
+        .comparison-issues h5,
+        .comparison-improvements h5 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-issues ul,
+        .comparison-improvements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-issues li,
+        .comparison-improvements li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .comparison-issues li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .comparison-improvements li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .comparison-summary {
+            margin-top: 4rem;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-card h4 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .improvement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .improvement-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .improvement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .improvement-item h5 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            background: white;
+        }
+
+        .arch-diagram {
+            background: var(--light-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .arch-levels {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .arch-level {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .arch-level h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .arch-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .component {
+            background: var(--light-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* Data Collection Section */
+        .data-collection {
+            background: #f0f4f8;
+        }
+
+        .data-collection::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .data-sources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .data-source {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-source h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .data-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .data-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .data-list li::before {
+            content: "📊";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            background: #f5f7fa;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 3rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px white, 0 0 0 6px var(--primary-color);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .contact h2 {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-item img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .proposer-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .improvement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .improvement-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+            will-change: opacity, transform;
+            /* 성능 최적화 */
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        .overview-content {
+            margin-bottom: 4rem;
+        }
+
+        .purpose-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .purpose-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .purpose-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .purpose-card li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #666;
+        }
+
+        .purpose-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .phase-timeline {
+            margin-top: 4rem;
+        }
+
+        .phase-timeline h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-size: 1.8rem;
+        }
+
+        .phase-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .phase-flow::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #3498db, #9b59b6, #e74c3c);
+            z-index: 0;
+        }
+
+        .phase-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .phase-card h4 {
+            padding: 1rem 1.5rem 0.5rem;
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .phase-card p {
+            padding: 0 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-card ul {
+            padding: 0 1.5rem 1.5rem;
+            list-style: none;
+            margin: 0;
+        }
+
+        .phase-card li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .phase-arrow {
+            position: absolute;
+            right: -25px;
+            top: 80px;
+            font-size: 2rem;
+            color: #ddd;
+            z-index: 2;
+        }
+
+        .phase-item:last-child .phase-arrow {
+            display: none;
+        }
+
+        @media (max-width: 968px) {
+            .phase-flow {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .phase-flow::before {
+                top: 30px;
+                bottom: 30px;
+                left: 30px;
+                right: auto;
+                width: 2px;
+                height: auto;
+                background: linear-gradient(to bottom, #3498db, #9b59b6, #e74c3c);
+            }
+
+            .phase-arrow {
+                top: auto;
+                bottom: -40px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%) rotate(90deg);
+            }
+
+            .phase-card {
+                max-width: 100%;
+            }
+        }
+
+        .current-system-info {
+            margin-bottom: 3rem;
+        }
+
+        .current-system-info h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .system-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .system-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .system-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .system-card li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .problem-analysis h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .arch-diagram h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .arch-description {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .technical-details {
+            margin-top: 4rem;
+        }
+
+        .technical-details h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+        }
+
+        .tech-card li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+
+        .data-management {
+            margin-bottom: 4rem;
+        }
+
+        .data-management h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .data-phases {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .data-phase {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-phase h4 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .data-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .data-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .data-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .data-content h5 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .data-content p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .data-lifecycle {
+            margin-top: 4rem;
+        }
+
+        .data-lifecycle h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .lifecycle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .lifecycle-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .lifecycle-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .lifecycle-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .lifecycle-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .lifecycle-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .phase-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .short-term-min {
+            background: #3498db;
+        }
+
+        .short-term-opt {
+            background: #9b59b6;
+        }
+
+        .long-term {
+            background: #e74c3c;
+        }
+
+        .phase-label {
+            font-weight: 600;
+        }
+
+        .phase-period {
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+
+        .timeline-phase {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Benefits Section Features */
+        .benefits {
+            background: white;
+        }
+
+        .benefits .solution-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .benefits .feature {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefits .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .benefits .feature:nth-child(2)::before {
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .benefits .feature:nth-child(3)::before {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .benefits .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefits .feature-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            color: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .benefits .feature:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+
+        .benefits .feature:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .benefits .feature h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .benefits .feature ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .benefits .feature li {
+            padding: 0.75rem 0;
+            color: #666;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .benefits .feature li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .benefits .metric-highlight {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .benefits .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefits .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 968px) {
+            .benefits .solution-features {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .ai-learning-system {
+            margin-top: 4rem;
+        }
+
+        .ai-learning-system h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .ai-learning-system .approach-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .ai-learning-system .approach-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .ai-learning-system .approach-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .ai-learning-system .approach-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-learning-system .approach-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-learning-system .approach-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .ai-learning-system .approach-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+        }
+
+        .ai-learning-system .approach-card li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* .arch-level 스타일은 기존에 정의됨 */
+
+        /* System Architecture Diagram Styles */
+        .architecture-diagram {
+            position: relative;
+            min-height: 800px;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 800px;
+        }
+
+        .arch-group {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .arch-group-title {
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .arch-node {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            margin: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .arch-node:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .arch-edge {
+            position: absolute;
+            background: var(--primary-color);
+            z-index: -1;
+        }
+
+        .arch-edge.vertical {
+            width: 2px;
+        }
+
+        .arch-edge.horizontal {
+            height: 2px;
+        }
+
+        .arch-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .arch-arrow.down {
+            border-width: 10px 10px 0 10px;
+            border-color: var(--primary-color) transparent transparent transparent;
+        }
+
+        .arch-arrow.right {
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--primary-color);
+        }
+
+        /* Responsive architecture diagram */
+        @media (max-width: 1200px) {
+            .diagram-container {
+                height: auto;
+                min-height: 1000px;
+            }
+
+            .arch-group {
+                position: relative !important;
+                margin-bottom: 2rem;
+                width: 100% !important;
+                left: 0 !important;
+                top: 0 !important;
+            }
+
+            .arch-edge,
+            .arch-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">법률똑똑이 개선 제안</div>
+            <ul class="nav-links">
+                <li><a href="#overview">개요</a></li>
+                <li><a href="#current">현황</a></li>
+                <li><a href="#solution">솔루션</a></li>
+                <li><a href="#example">예시</a></li>
+                <li><a href="#architecture">구조</a></li>
+                <li><a href="#timeline">일정</a></li>
+                <li><a href="#contact">문의</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>법률구조서비스 플랫폼<br>One-Stop 법률똑똑이<br>개선 제안서</h1>
+            <p class="hero-subtitle">One-Stop 맞춤형 법률구조 서비스 구현을 위한 AI 고도화 전략</p>
+            <div class="policy-badge">
+                <span>국정과제 64-5</span>
+                <span>법률구조서비스플랫폼 구축 및 사회적 취약계층 우선지원</span>
+            </div>
+            <div class="proposer-info">
+                <div class="proposer">
+                    <img src="imgs/ali_logo.png" alt="자치법연구원 로고">
+                    <span>자치법연구원</span>
+                </div>
+                <div class="proposer">
+                    <img src="imgs/poi_logo.png" alt="포이 로고">
+                    <span>주식회사 포이</span>
+                </div>
+            </div>
+            <a href="#overview" class="cta-button">제안서 살펴보기</a>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="overview">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>프로젝트 개요</h2>
+                <p>one-stop 법률구조에 필요한 국가법령정보센터, 대법원, 헌법재판소, 국회 등<br>
+                    다양한 공공 법률 정보를 하나로 통합하여 단계적 AI 법률지식서비스 개선 방안</p>
+            </div>
+
+            <div class="overview-content fade-in">
+                <div class="purpose-card">
+                    <h3>📌 목적 및 필요성</h3>
+                    <p>이용자가 자신의 사례에 적합한 법률구조서비스와 법률지식정보를 제공받을 수 있도록, AI 법률지식서비스 개선을 위한 방안을 모색</p>
+                    <ul>
+                        <li>한 곳에서 나의 법률문제를 해결할 수 있는 통합 플랫폼</li>
+                        <li>국민의 편의성 증진 및 참여기관의 업무능률 향상</li>
+                        <li>생성형 AI 기반 맞춤형 법률 지원 서비스 구현</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-timeline fade-in">
+                <h3>🚀 단계별 추진 전략</h3>
+                <div class="phase-flow">
+                    <div class="phase-item">
+                        <div class="phase-number">1</div>
+                        <div class="phase-card">
+                            <div class="phase-header short-term-min">
+                                <span class="phase-label">단기-최소</span>
+                                <span class="phase-period">2025년 6-8월</span>
+                            </div>
+                            <h4>법률 데이터 체계화</h4>
+                            <p>체계적 데이터 수집 및 구조화 기반 구축</p>
+                            <ul>
+                                <li>법령 정보 수집 자동화</li>
+                                <li>데이터 구조화 및 표준화</li>
+                                <li>Q&A 학습데이터셋 설계</li>
+                            </ul>
+                        </div>
+                        <div class="phase-arrow">→</div>
+                    </div>
+
+                    <div class="phase-item">
+                        <div class="phase-number">2</div>
+                        <div class="phase-card">
+                            <div class="phase-header short-term-opt">
+                                <span class="phase-label">단기-최적</span>
+                                <span class="phase-period">2025년 9-11월</span>
+                            </div>
+                            <h4>지능형 시스템 구축</h4>
+                            <p>Ontology 기반 RAG 고도화 및 Agent 개발</p>
+                            <ul>
+                                <li>Ontology 기반 지식 구조화</li>
+                                <li>RAG 시스템 고도화</li>
+                                <li>능동형 대화 Agent 개발</li>
+                            </ul>
+                        </div>
+                        <div class="phase-arrow">→</div>
+                    </div>
+
+                    <div class="phase-item">
+                        <div class="phase-number">3</div>
+                        <div class="phase-card">
+                            <div class="phase-header long-term">
+                                <span class="phase-label">중장기-최적</span>
+                                <span class="phase-period">2026년~</span>
+                            </div>
+                            <h4>One-Stop 법률구조 완성</h4>
+                            <p>차세대 통합 법률 지원 서비스</p>
+                            <ul>
+                                <li>전 분야 서비스 확대</li>
+                                <li>다채널 통합 플랫폼</li>
+                                <li>지속적 학습 체계</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Status Section -->
+    <section id="current" class="current-status">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>현재 서비스의 한계</h2>
+                <p>현행 '법률똑똑이' 서비스는 NLU 기반 시나리오 답변에 머물러 있어<br>
+                    이용자의 구체적인 법률문제 해결에는 제한적입니다</p>
+            </div>
+
+            <div class="current-system-info fade-in">
+                <h3>📊 현재 시스템 현황</h3>
+                <div class="system-grid">
+                    <div class="system-card">
+                        <h4>기본 Q&A 시스템</h4>
+                        <ul>
+                            <li><strong>구조:</strong> 시나리오 기반 단순 응답</li>
+                            <li><strong>데이터:</strong> 제한적 Q&A 세트</li>
+                            <li><strong>한계:</strong> 고정된 답변 패턴</li>
+                        </ul>
+                    </div>
+                    <div class="system-card">
+                        <h4>분산된 데이터 체계</h4>
+                        <ul>
+                            <li><strong>현황:</strong> 체계화되지 않은 법률 정보</li>
+                            <li><strong>문제:</strong> 정보 간 연결성 부재</li>
+                            <li><strong>결과:</strong> 단편적 정보 제공</li>
+                        </ul>
+                    </div>
+                    <div class="system-card">
+                        <h4>수동적 개선 체계</h4>
+                        <ul>
+                            <li><strong>학습:</strong> 수동 업데이트 의존</li>
+                            <li><strong>평가:</strong> 체계적 검증 부재</li>
+                            <li><strong>개선:</strong> 지속적 향상 메커니즘 부족</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-analysis fade-in">
+                <h3>🔍 문제점의 근본 원인 분석</h3>
+                <div class="status-grid">
+                    <div class="status-card">
+                        <h3>데이터 설계 미비</h3>
+                        <ul>
+                            <li>추론능력 학습을 위한 데이터 설계 부족</li>
+                            <li>추상적·전문적 법률데이터 특성 미고려</li>
+                            <li>문제해결적 답변을 위한 학습데이터 부족</li>
+                            <li>데이터셋 구축 과정 체계화 미비</li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>의도 파악 및 매칭 한계</h3>
+                        <ul>
+                            <li>질의 의도 분석 실패 시 부적절한 답변</li>
+                            <li>유사 질의에만 제한적 답변 가능</li>
+                            <li>법령 및 판례 질의의 낮은 정확도</li>
+                            <li>개인 상황을 고려한 맞춤형 답변 불가</li>
+                        </ul>
+                    </div>
+                    <div class="status-card">
+                        <h3>능동형 대화 모델 부재</h3>
+                        <ul>
+                            <li>단순 질의-응답 구조의 한계</li>
+                            <li>추가 정보 수집을 위한 대화 전략 부재</li>
+                            <li>Agent 미적용으로 능동적 처리 불가</li>
+                            <li>사용자 맥락 이해 및 활용 미흡</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="solution" class="solution">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>우리의 솔루션</h2>
+                <p>근본적 원인 해결을 위한 단계적 개선 방안으로<br>
+                    Ontology 기반의 친절하고 적극적이며 정확한 법률지식서비스 구현</p>
+            </div>
+
+            <div class="solution-approach fade-in">
+                <h3>📐 개선 접근 방식</h3>
+                <div class="approach-cards">
+                    <div class="approach-card">
+                        <div class="approach-icon">📚</div>
+                        <h4>추가 데이터 수집 및 구조화</h4>
+                        <ul>
+                            <li>법률 교과서 및 주석서 통합</li>
+                            <li>하급심 판례 데이터 확보</li>
+                            <li>ADR 결정례 및 유권해석례</li>
+                            <li>전문가 검토의견서 활용</li>
+                        </ul>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon">🕸️</div>
+                        <h4>법률 지식 네트워크 구축</h4>
+                        <ul>
+                            <li>법령-판례-절차 연관관계 체계화</li>
+                            <li>Ontology 기반 지식 구조화</li>
+                            <li>의미 기반 지능형 검색</li>
+                            <li>추론 기반 관계 발견</li>
+                        </ul>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon">🤖</div>
+                        <h4>능동형 대화 AI Agent</h4>
+                        <ul>
+                            <li>다단계 질의 전략 수립</li>
+                            <li>맥락 인식 및 의도 파악</li>
+                            <li>최적 답변 및 추가 질의 생성</li>
+                            <li>문제 해결 중심 대화 설계</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-learning-system fade-in" style="margin-top: 4rem;">
+                <h3>🧠 AI 학습 엔진 및 평가 시스템</h3>
+                <div class="approach-cards">
+                    <div class="approach-card">
+                        <div class="approach-icon">📊</div>
+                        <h4>Q&A 기반 학습데이터셋 개선</h4>
+                        <ul>
+                            <li>사용자 질의 패턴 분석</li>
+                            <li>전문가 검증 답변 생성</li>
+                            <li>맥락별 데이터셋 구축</li>
+                            <li>지속적 데이터 정제</li>
+                        </ul>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon">🔄</div>
+                        <h4>LLM 학습 시스템</h4>
+                        <ul>
+                            <li>주기적 파인튜닝 체계</li>
+                            <li>도메인 특화 학습</li>
+                            <li>실시간 피드백 반영</li>
+                            <li>점진적 성능 개선</li>
+                        </ul>
+                    </div>
+                    <div class="approach-card">
+                        <div class="approach-icon">✅</div>
+                        <h4>자동화된 평가 시스템</h4>
+                        <ul>
+                            <li>답변 품질 자동 평가</li>
+                            <li>법률 정확성 검증</li>
+                            <li>사용자 만족도 측정</li>
+                            <li>성능 지표 모니터링</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-enhancement fade-in">
+                <h3>🗂️ 데이터 수집 및 관리 개선</h3>
+                <div class="enhancement-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>수집 대상</th>
+                                <th>필요성</th>
+                                <th>획득 방안</th>
+                                <th>활용 효과</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>법률 교과서</strong></td>
+                                <td>체계적 법률 개념 설명</td>
+                                <td>출판사 협약/구매</td>
+                                <td>기초 개념 이해도 향상</td>
+                            </tr>
+                            <tr>
+                                <td><strong>주석서</strong></td>
+                                <td>조문별 상세 해석</td>
+                                <td>저작권자 협의</td>
+                                <td>구체적 법령 해석 제공</td>
+                            </tr>
+                            <tr>
+                                <td><strong>하급심 판례</strong></td>
+                                <td>실무적 적용 사례</td>
+                                <td>대법원 협의 필요</td>
+                                <td>현실적 판단 기준 제시</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ADR 결정례</strong></td>
+                                <td>분쟁 해결 패턴</td>
+                                <td>관련 기관 협조</td>
+                                <td>대안적 해결방안 제시</td>
+                            </tr>
+                            <tr>
+                                <td><strong>유권해석례</strong></td>
+                                <td>행정부 법령 해석</td>
+                                <td>정부 기관 연계</td>
+                                <td>공식 해석 기준 제공</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="expected-improvements fade-in">
+                <h3>🎯 기대 개선 효과</h3>
+                <div class="improvement-metrics">
+                    <div class="metric-card">
+                        <div class="metric-icon">🎯</div>
+                        <h4>맞춤형 법률 상담</h4>
+                        <div class="metric-value">개인화된 해결책</div>
+                        <p>사용자의 구체적 상황을 파악하여 맞춤형 법률 정보와 실행 가능한 해결 방안을 제시</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">🔄</div>
+                        <h4>능동적 문제 해결</h4>
+                        <div class="metric-value">대화형 지원</div>
+                        <p>단순 답변을 넘어 추가 질문과 정보 수집을 통한 종합적이고 완전한 문제 해결 지원</p>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📚</div>
+                        <h4>신뢰할 수 있는 정보</h4>
+                        <div class="metric-value">근거 기반 답변</div>
+                        <p>법령, 판례, 전문 자료를 종합한 정확하고 신뢰도 높은 법률 정보 제공</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Section -->
+    <section id="example" class="example">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기존 vs 개선된 AI 대화 방식 비교</h2>
+                <p>동일한 질문에 대한 현재 서비스와 개선된 서비스의 응답 차이를 확인해보세요</p>
+            </div>
+
+            <div class="comparison-container fade-in">
+                <!-- 기존 AI 채팅 -->
+                <div class="chat-wrapper">
+                    <div class="chat-container current">
+                        <div class="chat-header current-header">
+                            <h4>기존 법률똑똑이</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>안녕하세요</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p>안녕하세요! 법률은 질의하신 사안과 정확하게 일치하는 사례가 아닙니다.</p>
+                                    <p style="margin-top: 0.5rem;">이는 참고용으로만 사용하시고 개별적인 사안과 관련하여 구체적인 상담이 필요한 경우에는 반드시
+                                        공단을 방문하거나 전화상담(☎국번없이 132)을 통해 상담하시기 바랍니다.</p>
+                                    <p style="margin-top: 1rem;">첫봇을 통한 답변 내용과 그 활용에 따른 결과에 대해서 공단은 어떠한 법률적 책임을 지지 않으며,
+                                        귀하의 질의 내용은 인공지능 학습에 사용될 수 있습니다.</p>
+
+                                    <div
+                                        style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 10px;">
+                                        <p><strong>원하시는 법률상담은 아래 메뉴를 선택해주세요:</strong></p>
+                                        <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                                            <li style="padding: 0.5rem 0;">📋 주택·상가임대차</li>
+                                            <li style="padding: 0.5rem 0;">⚖️ 주택임대차</li>
+                                            <li style="padding: 0.5rem 0;">💰 임대차 기간 및 종료에 관한 분쟁</li>
+                                            <li style="padding: 0.5rem 0;">📄 1.임대차의 존속기간</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>1. 계약으로 존속기간을 정하는 경우</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p style="font-weight: bold; color: #2c3e50;">참고사례 [전체보기]</p>
+
+                                    <div
+                                        style="margin-top: 1rem; padding: 1rem; background: #e8f0fe; border-radius: 10px;">
+                                        <p><strong>1. 주택임차인이 2년 미만으로 약정한 임차기간을 주장할 수 있는지</strong></p>
+                                        <p style="margin-top: 1rem;"><strong>2. 임대인 입장에서 주택을 임차할때 있어서 특별한 사정이 없는 한
+                                                임대차기간의 하한선이 2년이라는 점에 대해서는 잘 모르는 경우가 많습니다...</strong></p>
+                                        <p style="margin-top: 1rem;"><strong>3. 저는 임대인과 계약 기간을 1년으로 정하였습니다...</strong>
+                                        </p>
+                                    </div>
+
+                                    <p style="margin-top: 1rem; color: #666;">오후 1:05</p>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>주택임차인이 2년 미만으로 약정한 임차기간을 주장할 수 있는지</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p>주택임대차보호법 제4조 제1항에 따라, 임대차기간을 2년 미만으로 약정한 경우에도 임차인은 2년의 최소 주거안정기간을 보호받을 수 있습니다.
+                                    </p>
+                                    <p style="margin-top: 0.5rem;">그러나, 임차인이 2년 미만의 약정기간이 유효함을 주장하면 해당 약정이 유효하며, 이에 따라
+                                        보증금 반환을 청구할 수 있습니다.</p>
+                                    <p style="margin-top: 0.5rem;">임대인은 법정기간 내 임차인에게 명도를 청구할 수 없으므로, 계약 체결 시 법적 규정을 명확히
+                                        이해하고 이에 따라 조치를 취해야 합니다.</p>
+
+                                    <div class="contact-box" style="margin-top: 1rem;">
+                                        <p><strong>📞 상담 안내</strong><br>
+                                            오후 1:06&nbsp;&nbsp;&nbsp;답변이 도움되셨나요? 👍 👎
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="comparison-issues">
+                                <h5>❌ 문제점</h5>
+                                <ul>
+                                    <li>복잡한 메뉴 선택 방식으로 접근성 떨어짐</li>
+                                    <li>사용자의 구체적 상황 파악 없이 일반론만 제시</li>
+                                    <li>실질적인 해결 방안보다는 법조문 설명에 치중</li>
+                                    <li>긴 면책 조항으로 시작하여 사용자 피로감 증가</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 개선된 AI 채팅 -->
+                <div class="chat-wrapper">
+                    <div class="chat-container improved">
+                        <div class="chat-header">
+                            <h4>차세대 One-Stop 법률똑똑이</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임대차계약에 대해 알고 싶습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률똑똑이</div>
+                                    <p>네, 임대차계약에 대해 도와드리겠습니다.<br>
+                                        혹시 임대인(집주인)이신가요, 아니면 임차인(세입자)이신가요?</p>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임차인입니다</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률똑똑이</div>
+                                    <p>알겠습니다. 임차인으로서 어떤 점이 어려우신가요?</p>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>지금 살고 있는 집을 1년 전에 빌렸는데, 집주인이 계약기간이 끝났다며 집을 비워주거나 아니면 보증금을 올려달라고 요구합니다. 제가 집주인 말대로
+                                        집을 비워주거나 보증금을 올려주어야 하는지 알고 싶습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률똑똑이</div>
+                                    <p>집을 빌리실 때 임대차계약을 얼마의 기간으로 하셨나요?</p>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>1년으로 했습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률똑똑이</div>
+                                    <p><strong>네, 법규정을 통해 답변드리겠습니다.</strong></p>
+
+                                    <div class="info-box">
+                                        <p><strong>📋 주택임대차보호법 제4조</strong></p>
+                                        <p style="margin-top: 0.5rem; font-style: italic;">"기간을 정하지 아니하거나 2년 미만으로 정한
+                                            임대차는 그 기간을 2년으로 본다. 다만, 임차인은 2년 미만으로 정한 기간이 유효함을 주장할 수 있다"</p>
+                                    </div>
+
+                                    <div class="info-box secondary">
+                                        <p><strong>⚖️ 귀하의 사안 분석</strong></p>
+                                        <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                                            <li>✅ 임차인이 임대인에게 계약기간이 1년임을 주장할 수는 있으나</li>
+                                            <li>❌ 임대인이 임차인에게 계약기간이 1년뿐이라고 주장할 수는 없고</li>
+                                            <li>📌 임대인은 2년의 계약기간을 인정해야 합니다</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="action-box">
+                                        <p><strong>💡 결론 및 대응방안</strong></p>
+                                        <p style="margin-top: 0.5rem;">임차인은 임대인에게 <strong>임대차계약기간이 아직 1년 남아있음</strong>을
+                                            이유로 임대인의 요구에 따르지 않을 수 있습니다.</p>
+                                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                            <strong>근거:</strong> 주택임대차보호법 제4조제1항, 대법원 2001. 9. 25. 선고 2000다24078 판결<br>
+                                            <strong>참조:</strong> 법률구조공단 플랫폼 > 법률상담사례 > 1년약정의 주택임대차
+                                        </p>
+                                    </div>
+
+                                    <div class="contact-box">
+                                        <p><strong>📞 추가 상담이 필요하신가요?</strong><br>
+                                            법률구조공단 ☎132 (무료)<br>
+                                            www.klac.or.kr
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="comparison-improvements">
+                                <h5>✅ 개선사항</h5>
+                                <ul>
+                                    <li>자연스러운 대화를 통한 상황 파악</li>
+                                    <li>단계적 질문으로 정확한 사실관계 확인</li>
+                                    <li>법조문과 판례를 근거로 한 명확한 답변</li>
+                                    <li>실질적이고 구체적인 해결방안 제시</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>AI 서비스 구조</h2>
+                <p>능동형 대화 Agent 모델 기반의 차세대 법률 지원 서비스 아키텍처</p>
+            </div>
+
+            <div class="arch-diagram fade-in">
+                <h3 style="text-align: center; margin-bottom: 3rem;">🏗️ 시스템 아키텍처</h3>
+                <div style="width: 100%; overflow-x: auto;">
+                    <svg width="1200" height="800" style="margin: 0 auto; display: block;">
+                        <!-- 정의 섹션 -->
+                        <defs>
+                            <!-- 그라디언트 정의 -->
+                            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+
+                            <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#11998e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1" />
+                            </linearGradient>
+
+                            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fc4a1a;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f7b733;stop-opacity:1" />
+                            </linearGradient>
+
+                            <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+
+                            <!-- 그림자 필터 -->
+                            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                                <feOffset dx="0" dy="2" result="offsetblur" />
+                                <feFlood flood-color="#000000" flood-opacity="0.1" />
+                                <feComposite in2="offsetblur" operator="in" />
+                                <feMerge>
+                                    <feMergeNode />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+
+                            <!-- 화살표 정의 -->
+                            <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto">
+                                <path d="M 0 0 L 12 6 L 0 12 z" fill="#667eea" opacity="0.8" />
+                            </marker>
+                        </defs>
+
+                        <!-- 배경 -->
+                        <rect x="0" y="0" width="1200" height="800" fill="#f8f9fa" />
+
+                        <!-- 그룹 박스들 -->
+                        <!-- 사용자 인터페이스 그룹 -->
+                        <g>
+                            <rect x="20" y="20" width="1160" height="120" fill="white" stroke="#e0e0e0" stroke-width="1"
+                                rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="20" width="1160" height="40" fill="url(#blueGradient)" rx="15 15 0 0"
+                                opacity="0.1" />
+                            <text x="600" y="45" text-anchor="middle" font-size="16" font-weight="600"
+                                fill="#1a5490">사용자 접점 계층</text>
+                        </g>
+
+                        <!-- AI Agent 그룹 -->
+                        <g>
+                            <rect x="20" y="160" width="1160" height="140" fill="white" stroke="#e0e0e0"
+                                stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="160" width="1160" height="40" fill="url(#purpleGradient)" rx="15 15 0 0"
+                                opacity="0.1" />
+                            <text x="600" y="185" text-anchor="middle" font-size="16" font-weight="600"
+                                fill="#1a5490">능동형 대화 Agent 계층</text>
+                        </g>
+
+                        <!-- 핵심 엔진 그룹 -->
+                        <g>
+                            <rect x="20" y="320" width="570" height="160" fill="white" stroke="#e0e0e0" stroke-width="1"
+                                rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="320" width="570" height="40" fill="url(#orangeGradient)" rx="15 15 0 0"
+                                opacity="0.1" />
+                            <text x="305" y="345" text-anchor="middle" font-size="16" font-weight="600"
+                                fill="#1a5490">핵심 AI 엔진</text>
+                        </g>
+
+                        <!-- 학습 엔진 그룹 -->
+                        <g>
+                            <rect x="610" y="320" width="570" height="160" fill="white" stroke="#e0e0e0"
+                                stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="610" y="320" width="570" height="40" fill="url(#greenGradient)" rx="15 15 0 0"
+                                opacity="0.1" />
+                            <text x="895" y="345" text-anchor="middle" font-size="16" font-weight="600"
+                                fill="#1a5490">AI 학습 및 평가 엔진</text>
+                        </g>
+
+                        <!-- 지식 네트워크 그룹 -->
+                        <g>
+                            <rect x="20" y="500" width="1160" height="120" fill="white" stroke="#e0e0e0"
+                                stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="500" width="1160" height="40" fill="url(#purpleGradient)" rx="15 15 0 0"
+                                opacity="0.1" />
+                            <text x="600" y="525" text-anchor="middle" font-size="16" font-weight="600"
+                                fill="#1a5490">법률 지식 네트워크</text>
+                        </g>
+
+                        <!-- 데이터 소스 그룹 -->
+                        <g>
+                            <rect x="20" y="640" width="1160" height="140" fill="white" stroke="#e0e0e0"
+                                stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="640" width="1160" height="40" fill="url(#greenGradient)" rx="15 15 0 0"
+                                opacity="0.1" />
+                            <text x="600" y="665" text-anchor="middle" font-size="16" font-weight="600"
+                                fill="#1a5490">데이터 통합 계층</text>
+                        </g>
+
+                        <!-- 사용자 인터페이스 컴포넌트들 -->
+                        <g transform="translate(300, 70)">
+                            <rect width="250" height="50" fill="#e8f0fe" stroke="#667eea" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="125" y="30" text-anchor="middle" font-size="14" fill="#1a5490">🌐 웹 플랫폼</text>
+                        </g>
+
+                        <g transform="translate(650, 70)">
+                            <rect width="250" height="50" fill="#e8f0fe" stroke="#667eea" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="125" y="30" text-anchor="middle" font-size="14" fill="#1a5490">📱 모바일 앱</text>
+                        </g>
+
+                        <!-- AI Agent 컴포넌트들 -->
+                        <g transform="translate(50, 210)">
+                            <rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">🎯 의도 분석
+                                Agent</text>
+                        </g>
+
+                        <g transform="translate(280, 210)">
+                            <rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">📊 정보 수집
+                                Agent</text>
+                        </g>
+
+                        <g transform="translate(510, 210)">
+                            <rect width="200" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="35" text-anchor="middle" font-size="14" fill="#4a148c">🧠 추론 Agent</text>
+                        </g>
+
+                        <g transform="translate(730, 210)">
+                            <rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">💡 답변 생성
+                                Agent</text>
+                        </g>
+
+                        <g transform="translate(960, 210)">
+                            <rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">✅ 품질 검증 Agent</text>
+                        </g>
+
+                        <!-- 핵심 AI 엔진 컴포넌트들 -->
+                        <g transform="translate(50, 380)">
+                            <rect width="180" height="60" fill="#fff3e0" stroke="#ff6f00" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="90" y="35" text-anchor="middle" font-size="14" fill="#e65100">🤖 한국어 특화 LLM</text>
+                        </g>
+
+                        <g transform="translate(250, 380)">
+                            <rect width="150" height="60" fill="#fff3e0" stroke="#ff6f00" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="75" y="35" text-anchor="middle" font-size="14" fill="#e65100">🔍 RAG System</text>
+                        </g>
+
+                        <!-- Vector DB - 개선된 디자인 -->
+                        <g transform="translate(420, 370)">
+                            <!-- 그림자 효과 -->
+                            <ellipse cx="70" cy="85" rx="55" ry="8" fill="#000" opacity="0.1" />
+
+                            <!-- DB 몸체 -->
+                            <defs>
+                                <linearGradient id="dbGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ffecb3;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ffc107;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- 원통 옆면 -->
+                            <rect x="15" y="25" width="110" height="50" fill="url(#dbGradient1)" rx="2" />
+
+                            <!-- 원통 상단 -->
+                            <ellipse cx="70" cy="25" rx="55" ry="12" fill="#ffecb3" />
+                            <ellipse cx="70" cy="25" rx="50" ry="10" fill="#fff8e1" />
+
+                            <!-- 원통 하단 (보이는 부분) -->
+                            <ellipse cx="70" cy="75" rx="55" ry="12" fill="#ffc107" />
+
+                            <!-- 하이라이트 -->
+                            <ellipse cx="55" cy="30" rx="15" ry="4" fill="#fff" opacity="0.4" />
+
+                            <!-- 텍스트 -->
+                            <text x="70" y="53" text-anchor="middle" font-size="13" font-weight="600"
+                                fill="#f57c00">Vector DB</text>
+                            <text x="70" y="68" text-anchor="middle" font-size="11" fill="#ff8f00">Embeddings</text>
+                        </g>
+
+                        <!-- 학습 및 평가 엔진 컴포넌트들 -->
+                        <g transform="translate(670, 380)">
+                            <rect width="220" height="60" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="110" y="35" text-anchor="middle" font-size="14" fill="#1b5e20">📝 학습데이터 생성기</text>
+                        </g>
+
+                        <g transform="translate(920, 380)">
+                            <rect width="220" height="60" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="110" y="35" text-anchor="middle" font-size="14" fill="#1b5e20">🔄 모델 학습
+                                파이프라인</text>
+                        </g>
+
+                        <!-- 지식 네트워크 컴포넌트들 -->
+                        <g transform="translate(150, 550)">
+                            <rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">📚 법령 온톨로지</text>
+                        </g>
+
+                        <g transform="translate(380, 550)">
+                            <rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">⚖️ 판례 관계망</text>
+                        </g>
+
+                        <g transform="translate(610, 550)">
+                            <rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">🔀 절차 플로우</text>
+                        </g>
+
+                        <g transform="translate(840, 550)">
+                            <rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">🕸️ 지식 그래프</text>
+                        </g>
+
+                        <!-- 데이터 소스들 -->
+                        <g transform="translate(150, 704)">
+                            <rect width="200" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#1b5e20">🏛️ 법령정보센터
+                                API</text>
+                        </g>
+
+                        <g transform="translate(380, 704)">
+                            <rect width="200" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#1b5e20">⚖️ 대법원 시스템</text>
+                        </g>
+
+                        <!-- 내부 상담 DB - 개선된 디자인 -->
+                        <g transform="translate(610, 680)">
+                            <!-- 그림자 효과 -->
+                            <ellipse cx="100" cy="85" rx="75" ry="10" fill="#000" opacity="0.1" />
+
+                            <!-- DB 몸체 -->
+                            <defs>
+                                <linearGradient id="dbGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#c8e6c9;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4caf50;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- 원통 옆면 -->
+                            <rect x="25" y="20" width="150" height="55" fill="url(#dbGradient2)" rx="2" />
+
+                            <!-- 원통 상단 -->
+                            <ellipse cx="100" cy="20" rx="75" ry="15" fill="#c8e6c9" />
+                            <ellipse cx="100" cy="20" rx="70" ry="13" fill="#e8f5e9" />
+
+                            <!-- 원통 하단 (보이는 부분) -->
+                            <ellipse cx="100" cy="75" rx="75" ry="15" fill="#4caf50" />
+
+                            <!-- 하이라이트 -->
+                            <ellipse cx="80" cy="25" rx="20" ry="5" fill="#fff" opacity="0.4" />
+
+                            <!-- 데이터 라인 표시 -->
+                            <line x1="40" y1="35" x2="160" y2="35" stroke="#2e7d32" stroke-width="1" opacity="0.3" />
+                            <line x1="40" y1="45" x2="160" y2="45" stroke="#2e7d32" stroke-width="1" opacity="0.3" />
+                            <line x1="40" y1="55" x2="160" y2="55" stroke="#2e7d32" stroke-width="1" opacity="0.3" />
+
+                            <!-- 텍스트 -->
+                            <text x="100" y="50" text-anchor="middle" font-size="13" font-weight="600" fill="#1b5e20">내부
+                                상담 DB</text>
+                            <text x="100" y="65" text-anchor="middle" font-size="11" fill="#2e7d32">110만 건</text>
+                        </g>
+
+                        <g transform="translate(840, 704)">
+                            <rect width="200" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8"
+                                filter="url(#shadow)" />
+                            <text x="100" y="30" text-anchor="middle" font-size="14" fill="#1b5e20">📊 추가 학습데이터</text>
+                        </g>
+
+                        <!-- 연결선들 -->
+                        <!-- UI to Agent -->
+                        <path d="M 600 140 L 600 160" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)"
+                            opacity="0.6" />
+
+                        <!-- Agent to Core -->
+                        <path d="M 380 280 L 380 320" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)"
+                            opacity="0.6" />
+                        <path d="M 820 280 L 820 320" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)"
+                            opacity="0.6" />
+
+                        <!-- Core to Knowledge -->
+                        <path d="M 305 480 L 305 500" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)"
+                            opacity="0.6" />
+                        <path d="M 895 480 L 895 500" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)"
+                            opacity="0.6" />
+
+                        <!-- Knowledge to Data -->
+                        <path d="M 600 620 L 600 640" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)"
+                            opacity="0.6" />
+
+                        <!-- 양방향 화살표들 -->
+                        <path d="M 590 400 Q 600 410 610 400" stroke="#667eea" stroke-width="2" fill="none"
+                            opacity="0.4" stroke-dasharray="5,5" />
+                    </svg>
+                </div>
+                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #666;">
+                    능동형 대화 Agent 기반의 차세대 법률 지원 서비스 아키텍처
+                </p>
+            </div>
+
+            <div class="technical-details fade-in">
+                <h3>💡 핵심 기술 요소</h3>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h4>언어모델 최적화</h4>
+                        <ul>
+                            <li>법률 도메인 특화 파인튜닝</li>
+                            <li>한국어 법률 용어 강화</li>
+                            <li>판례 추론 능력 향상</li>
+                            <li>맥락 이해 성능 개선</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h4>지식 구조화</h4>
+                        <ul>
+                            <li>법률 온톨로지 설계</li>
+                            <li>의미적 관계 매핑</li>
+                            <li>추론 규칙 정의</li>
+                            <li>동적 지식 업데이트</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h4>대화 관리</h4>
+                        <ul>
+                            <li>다단계 질의 전략</li>
+                            <li>맥락 유지 및 활용</li>
+                            <li>의도 명확화 프로세스</li>
+                            <li>개인정보 보호 체계</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Collection Section -->
+    <section id="data" class="data-collection">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>데이터 수집 및 관리 방안</h2>
+                <p>체계적인 데이터 수집과 관리를 통한 고품질 법률 지식베이스 구축</p>
+            </div>
+
+            <div class="data-management fade-in">
+                <h3>📊 단계별 데이터 수집 전략</h3>
+                <div class="data-phases">
+                    <div class="data-phase">
+                        <h4>1단계: 기본 데이터 확보</h4>
+                        <div class="data-items">
+                            <div class="data-item">
+                                <span class="data-icon">📜</span>
+                                <div class="data-content">
+                                    <h5>현행 법령</h5>
+                                    <p>민사법, 형사법, 노동법 등 주요 법령<br>
+                                        국가법령정보센터 Open API 활용</p>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-icon">⚖️</span>
+                                <div class="data-content">
+                                    <h5>공개 판례</h5>
+                                    <p>대법원 및 법제처 공개 판례<br>
+                                        민사, 형사, 노동 분야 중심</p>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-icon">💬</span>
+                                <div class="data-content">
+                                    <h5>상담 Q&A</h5>
+                                    <p>공단 보유 110만 건 상담 데이터<br>
+                                        기본/유사/돌발 Q&A 세트</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-phase">
+                        <h4>2단계: 심화 데이터 통합</h4>
+                        <div class="data-items">
+                            <div class="data-item">
+                                <span class="data-icon">📚</span>
+                                <div class="data-content">
+                                    <h5>법률 교과서</h5>
+                                    <p>체계적 법률 개념 설명<br>
+                                        출판사 협약을 통한 확보</p>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-icon">📖</span>
+                                <div class="data-content">
+                                    <h5>주석서</h5>
+                                    <p>조문별 상세 해석 자료<br>
+                                        저작권자 협의 필요</p>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-icon">🏛️</span>
+                                <div class="data-content">
+                                    <h5>하급심 판례</h5>
+                                    <p>실무적 적용 사례<br>
+                                        공단-대법원 협의 추진</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-phase">
+                        <h4>3단계: 전문 데이터 확장</h4>
+                        <div class="data-items">
+                            <div class="data-item">
+                                <span class="data-icon">🤝</span>
+                                <div class="data-content">
+                                    <h5>ADR 결정례</h5>
+                                    <p>조정, 중재 사례<br>
+                                        분쟁 해결 패턴 분석</p>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-icon">📋</span>
+                                <div class="data-content">
+                                    <h5>유권해석례</h5>
+                                    <p>행정부 공식 해석<br>
+                                        정부 기관 연계</p>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-icon">🔍</span>
+                                <div class="data-content">
+                                    <h5>전문 검토의견</h5>
+                                    <p>법률 전문가 의견서<br>
+                                        실무적 관점 보강</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-lifecycle fade-in">
+                <h3>🔄 데이터 생명주기 관리</h3>
+                <div class="lifecycle-grid">
+                    <div class="lifecycle-card">
+                        <h4>수집 및 구조화</h4>
+                        <ul>
+                            <li>데이터 원천별 자동 수집 체계</li>
+                            <li>법률 전문가 검토 프로세스</li>
+                            <li>자연어 처리 및 태깅</li>
+                            <li>온톨로지 기반 분류</li>
+                            <li>관계 정보 추출 및 매핑</li>
+                        </ul>
+                    </div>
+                    <div class="lifecycle-card">
+                        <h4>활용 및 학습</h4>
+                        <ul>
+                            <li>모델 학습 데이터 생성</li>
+                            <li>RAG 시스템 통합</li>
+                            <li>실시간 검색 지원</li>
+                            <li>성능 모니터링</li>
+                            <li>사용자 피드백 반영</li>
+                        </ul>
+                    </div>
+                    <div class="lifecycle-card">
+                        <h4>업데이트 및 개선</h4>
+                        <ul>
+                            <li>법령 개정 자동 감지</li>
+                            <li>판례 변경 추적</li>
+                            <li>정기적 현행화</li>
+                            <li>품질 개선 순환</li>
+                            <li>구 데이터 아카이빙</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>단계별 구현 일정</h2>
+                <p>2025년 6월부터 2026년까지 체계적인 단계별 구현을 통한 서비스 고도화</p>
+            </div>
+
+            <div class="timeline-container fade-in">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">1단계: 단기-최소</div>
+                        <div class="timeline-date">2025년 6-8월 (3개월)</div>
+                        <h4>법률 데이터 체계화 및 기반 구축</h4>
+                        <ul>
+                            <li>법령 정보 수집 및 구조화 체계 구축</li>
+                            <li>데이터 표준화 및 품질 관리 프로세스</li>
+                            <li>Q&A 기반 학습데이터셋 설계</li>
+                            <li>민사·형사·노동 분야 우선 적용</li>
+                            <li>기초 데이터 검증 및 정제</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">2단계: 단기-최적</div>
+                        <div class="timeline-date">2025년 9-11월 (3개월)</div>
+                        <h4>지능형 시스템 및 RAG 고도화</h4>
+                        <ul>
+                            <li>Ontology 기반 법률 지식 구조화</li>
+                            <li>RAG 시스템 고도화 및 최적화</li>
+                            <li>능동형 대화 Agent 모델 개발</li>
+                            <li>교과서, 주석서, 하급심 판례 통합</li>
+                            <li>시범 서비스 운영 및 피드백 수집</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">3단계: 중장기-최적</div>
+                        <div class="timeline-date">2026년~ (후속사업)</div>
+                        <h4>One-Stop 법률구조 완성</h4>
+                        <ul>
+                            <li>문제 해결 중심 대화형 AI Assistant</li>
+                            <li>상담·구조·조정·피해구제 통합</li>
+                            <li>전 법률 분야로 서비스 확대</li>
+                            <li>다채널 통합 플랫폼 구축</li>
+                            <li>지속적 학습 및 자동 업데이트</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기대 효과</h2>
+                <p>AI 기술을 통한 법률 서비스의 혁신적 개선</p>
+            </div>
+
+            <div class="solution-features fade-in">
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <h3>대국민 서비스 향상</h3>
+                    <ul>
+                        <li>법률 정보 접근성 획기적 개선</li>
+                        <li>개인 맞춤형 법률 지원</li>
+                        <li>24시간 전문적 상담 가능</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>업무 효율성 증대</h3>
+                    <ul>
+                        <li>상담원 업무 최적화</li>
+                        <li>표준화된 정보 제공</li>
+                        <li>신속한 초기 대응</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>법률 서비스 혁신</h3>
+                    <ul>
+                        <li>AI 기반 공공 서비스 표준</li>
+                        <li>예방적 법률 지원</li>
+                        <li>지속적 품질 향상</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>프로젝트 문의</h2>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="imgs/ali_logo.png" alt="자치법연구원 로고">
+                    <h4>자치법연구원</h4>
+                    <p><strong>배유진 박사</strong><br>
+                        📧 pigice@hanmail.net<br>
+                        📞 010-2671-7753</p>
+                </div>
+                <div class="contact-item">
+                    <img src="imgs/poi_logo.png" alt="포이 로고">
+                    <h4>주식회사 포이</h4>
+                    <p><strong>김명석 과장</strong><br>
+                        📧 paul.kim@poi.so<br>
+                        📞 010-2819-1202</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
