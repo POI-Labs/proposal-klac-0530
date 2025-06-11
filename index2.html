@@ -1,0 +1,2133 @@
+네, 알겠습니다. `docs/제안서 2차 수정/수정계획 추가내용.md`와 `docs/제안서 2차 수정/index.html 수정계획.md`의 내용을 종합하여, 기존 `index.html`의 UI와 디자인 톤을 유지하면서 웹페이지에 최적화된 어투와 레이아웃으로 수정하겠습니다.
+
+수정 계획의 핵심 사항인 **문제점 우선 부각**, **RAG 시스템의 한계와 Knowledge Graph(지식 그래프) 기반 해결책 강조**, 그리고 **기존 데이터 구조화의 전략적 중요성**을 명확히 전달하는 데 중점을 두겠습니다.
+
+아래는 수정된 `index.html`의 전체 코드입니다.
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률구조서비스 플랫폼 개선 제안서 | 자치법연구원 X 포이</title>
+    <style>
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Paperlogy-8ExtraBold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Pretendard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        :root {
+            --primary-color: #1a5490;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --dark-bg: #1a1a2e;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --problem-color: #e74c3c;
+            --solution-color: #27ae60;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-logos img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            padding: 0.5rem;
+            z-index: 1002;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-content {
+            padding: 5rem 2rem 2rem;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            /* GPU 가속 및 레이어 분리 */
+            will-change: transform;
+            /* 성능 최적화 */
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+            background-size: cover;
+            animation: wave 20s linear infinite;
+            transform: translateZ(0);
+            /* GPU 가속 */
+            will-change: transform;
+            /* 성능 최적화 */
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--text-light);
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .policy-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .policy-badge span:first-child {
+            font-weight: 600;
+            padding-right: 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .proposer-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .proposer {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .proposer img {
+            height: 30px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--text-light);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Overview Section - 스크롤 시 안정성을 위한 설정 추가 */
+        #overview {
+            position: relative;
+            z-index: 10;
+            background: white;
+        }
+
+        /* Current Status Section (Modified) */
+        .current-status {
+            background: var(--light-bg);
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: #fff5f5;
+            border: 1px solid #fee;
+            border-left: 5px solid var(--problem-color);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.15);
+        }
+
+        .problem-card h3 {
+            color: var(--problem-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .problem-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .problem-card li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            color: #555;
+        }
+
+        .problem-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+        }
+
+        .comparison-chart {
+            margin-top: 4rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .comparison-chart h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .strategic-importance {
+            margin-top: 5rem;
+            padding: 3rem;
+            background: #e8f0fe;
+            border-radius: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .strategic-importance h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .strategic-importance p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Solution Section (Modified) */
+        .solution {
+            background: white;
+        }
+
+        .solution-process {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .solution-step {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-left: 5px solid var(--solution-color);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.1);
+            text-align: center;
+        }
+        
+        .solution-step h4 {
+            color: var(--solution-color);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-step ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .solution-step li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .solution-step li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .diagram-container {
+            margin-top: 4rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .diagram-container h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        /* Example Section (Modified for 3 columns) */
+        .example {
+            background: var(--light-bg);
+        }
+        .comparison-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+        
+        @media (min-width: 1200px) {
+            .comparison-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+
+        .chat-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* 기본 채팅 스타일 */
+        .chat-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .chat-header h4 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            padding: 2rem;
+            max-height: 700px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            background: #f1f1f1;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            max-width: 85%;
+        }
+
+        .message.user .message-bubble {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .message.user .message-label {
+            display: none;
+        }
+
+        .chat-container.current {
+            box-shadow: 0 10px 40px rgba(231, 76, 60, 0.1);
+        }
+
+        .chat-container.helplaw {
+             box-shadow: 0 10px 40px rgba(243, 156, 18, 0.1);
+        }
+
+        .chat-container.improved {
+            box-shadow: 0 10px 40px rgba(52, 152, 219, 0.1);
+        }
+
+        .current-header {
+            background: #e74c3c;
+        }
+        .helplaw-header {
+            background: #f39c12;
+        }
+
+        .chat-container.current .message.ai .message-bubble {
+            background: #f5f5f5;
+            color: #666;
+        }
+        
+        .chat-container.helplaw .message.ai .message-bubble {
+            background: #fef9e7;
+            color: #666;
+        }
+
+        .chat-container.improved .message.ai .message-bubble {
+            background: #e8f0fe;
+        }
+
+        .info-box {
+            background: #d4edda;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .info-box.secondary {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .action-box {
+            background: #e8f0fe;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #2196F3;
+        }
+
+        .contact-box {
+            background: #f8d7da;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+            border: 2px solid #e74c3c;
+        }
+
+        .comparison-issues,
+        .comparison-improvements {
+            margin-top: auto;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .comparison-issues {
+            background: #fee;
+            border-left: 4px solid #e74c3c;
+        }
+        .comparison-issues.helplaw {
+            background: #fef3e7;
+            border-left-color: #f39c12;
+        }
+
+        .comparison-improvements {
+            background: #e8f8ff;
+            border-left: 4px solid #2196F3;
+        }
+
+        .comparison-issues h5,
+        .comparison-improvements h5 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .comparison-issues ul,
+        .comparison-improvements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-issues li,
+        .comparison-improvements li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .comparison-issues li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .comparison-issues.helplaw li::before {
+             color: #f39c12;
+        }
+
+        .comparison-improvements li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        /* Other sections for reference */
+        .overview-content {
+            margin-bottom: 4rem;
+        }
+
+        .purpose-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .purpose-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .purpose-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .purpose-card li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #666;
+        }
+
+        .purpose-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .phase-timeline {
+            margin-top: 4rem;
+        }
+
+        .phase-timeline h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-size: 1.8rem;
+        }
+
+        .phase-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .phase-flow::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #3498db, #9b59b6, #e74c3c);
+            z-index: 0;
+        }
+
+        .phase-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .phase-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .short-term-min {
+            background: #3498db;
+        }
+
+        .short-term-opt {
+            background: #9b59b6;
+        }
+
+        .long-term {
+            background: #e74c3c;
+        }
+
+        .phase-label {
+            font-weight: 600;
+        }
+
+        .phase-period {
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+
+        .phase-card h4 {
+            padding: 1rem 1.5rem 0.5rem;
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .phase-card p {
+            padding: 0 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-card ul {
+            padding: 0 1.5rem 1.5rem;
+            list-style: none;
+            margin: 0;
+        }
+
+        .phase-card li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .phase-arrow {
+            position: absolute;
+            right: -25px;
+            top: 80px;
+            font-size: 2rem;
+            color: #ddd;
+            z-index: 2;
+        }
+
+        .phase-item:last-child .phase-arrow {
+            display: none;
+        }
+
+        .architecture {
+            background: white;
+        }
+
+        .arch-diagram {
+            background: var(--light-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline {
+            background: #f5f7fa;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+        .timeline-phase {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-date {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 3rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px white, 0 0 0 6px var(--primary-color);
+        }
+        
+        .benefits {
+            background: white;
+        }
+
+        .benefits .solution-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .benefits .feature {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefits .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .benefits .feature:nth-child(2)::before {
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .benefits .feature:nth-child(3)::before {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .benefits .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefits .feature-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            color: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .benefits .feature:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+
+        .benefits .feature:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .benefits .feature h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .benefits .feature ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .benefits .feature li {
+            padding: 0.75rem 0;
+            color: #666;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .benefits .feature li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .contact h2 {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-item img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+        
+        .data-collection {
+            background: #f0f4f8;
+        }
+        
+        #architecture {
+            display: block; /* 모바일에서 숨겨진 것을 다시 보이게 */
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .phase-flow {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .phase-flow::before {
+                top: 30px;
+                bottom: 30px;
+                left: 30px;
+                right: auto;
+                width: 2px;
+                height: auto;
+                background: linear-gradient(to bottom, #3498db, #9b59b6, #e74c3c);
+            }
+
+            .phase-arrow {
+                top: auto;
+                bottom: -40px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%) rotate(90deg);
+            }
+
+            .phase-card {
+                max-width: 100%;
+            }
+
+            .benefits .solution-features {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            /* Hero Section Mobile */
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .policy-badge {
+                font-size: 0.8rem;
+                padding: 0.8rem 1.5rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .policy-badge span:first-child {
+                border-right: none;
+                padding-right: 0;
+                padding-bottom: 0.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .proposer-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            /* Section Headers Mobile */
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+
+            /* Container Padding */
+            .container {
+                padding: 0 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            /* Grids Mobile */
+            .problem-grid,
+            .solution-process,
+            .benefits .solution-features {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem;
+            }
+            
+            /* Chat Mobile */
+            .chat-messages {
+                max-height: 400px;
+                font-size: 0.9rem;
+                padding: 1.5rem;
+            }
+
+            .message-bubble {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .comparison-issues,
+            .comparison-improvements {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+
+            /* Timeline Mobile */
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                padding: 1.5rem;
+            }
+
+            .timeline-content h4 {
+                font-size: 1.1rem;
+            }
+
+            .timeline-content ul {
+                font-size: 0.9rem;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+            
+            .problem-card,
+            .solution-step,
+            .feature,
+            .purpose-card {
+                padding: 1.5rem;
+            }
+
+            .purpose-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .phase-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .phase-card h4 {
+                font-size: 1rem;
+            }
+
+            .phase-card p,
+            .phase-card li {
+                font-size: 0.85rem;
+            }
+            
+            /* Hide Architecture Section on Mobile as it is complex*/
+            #architecture {
+                display: none;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">법률구조서비스 플랫폼 개선 제안</div>
+            <ul class="nav-links">
+                <li><a href="#current">한계점</a></li>
+                <li><a href="#solution">솔루션</a></li>
+                <li><a href="#overview">개요</a></li>
+                <li><a href="#example">예시</a></li>
+                <li><a href="#architecture">구조</a></li>
+                <li><a href="#timeline">일정</a></li>
+                <li><a href="#contact">문의</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-links">
+                <li><a href="#current" class="mobile-nav-link">한계점</a></li>
+                <li><a href="#solution" class="mobile-nav-link">솔루션</a></li>
+                <li><a href="#overview" class="mobile-nav-link">개요</a></li>
+                <li><a href="#example" class="mobile-nav-link">예시</a></li>
+                <li><a href="#architecture" class="mobile-nav-link">구조</a></li>
+                <li><a href="#timeline" class="mobile-nav-link">일정</a></li>
+                <li><a href="#contact" class="mobile-nav-link">문의</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>법률구조서비스 플랫폼<br>개선 제안서</h1>
+            <p class="hero-subtitle">One-Stop 맞춤형 법률구조 서비스 구현을 위한 AI 고도화 전략</p>
+            <div class="policy-badge">
+                <span>국정과제 64-5</span>
+                <span>법률구조서비스플랫폼 구축 및 사회적 취약계층 우선지원</span>
+            </div>
+            <div class="proposer-info">
+                <div class="proposer">
+                    <img src="imgs/ali_logo.png" alt="자치법연구원 로고">
+                    <span>자치법연구원</span>
+                </div>
+                <div class="proposer">
+                    <img src="imgs/poi_logo.png" alt="포이 로고">
+                    <span>주식회사 포이</span>
+                </div>
+            </div>
+            <a href="#current" class="cta-button">제안서 살펴보기</a>
+        </div>
+    </section>
+
+    <section id="current" class="current-status">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기존 RAG 시스템의 근본적 한계</h2>
+                <p>단순 텍스트 유사도 기반 검색으로는 법률 분야의 복잡한 추론과 정확한 정보 제공이 어렵습니다.<br>
+                    더 많은 데이터를 추가하는 것만으로는 이 문제를 해결할 수 없습니다.</p>
+            </div>
+
+            <div class="problem-grid fade-in">
+                <div class="problem-card">
+                    <h3>의미적 연관성 부족</h3>
+                    <ul>
+                        <li>키워드 매칭 중심의 단순 검색에 의존합니다.</li>
+                        <li>법령, 판례, 절차 간의 논리적, 인과적 관계를 파악하지 못합니다.</li>
+                        <li>결과적으로 사용자의 실제 의도와 무관한 정보를 제공하거나 중요한 맥락을 놓칩니다.</li>
+                    </ul>
+                </div>
+                <div class="problem-card">
+                    <h3>비구조화 정보 처리의 한계</h3>
+                    <ul>
+                        <li>법률 문서를 구조화되지 않은 텍스트 덩어리로만 인식하고 학습합니다.</li>
+                        <li>법률 개념 간의 계층 구조(예: 일반법-특별법)나 상호 관계를 이해하지 못합니다.</li>
+                        <li>이로 인해 추상적이고 일반적인 수준의 답변만 생성 가능합니다.</li>
+                    </ul>
+                </div>
+                <div class="problem-card">
+                    <h3>심각한 환각(Hallucination) 문제</h3>
+                    <ul>
+                        <li>최신 연구에 따르면, RAG를 사용한 법률 AI 도구조차 33% 이상의 환각을 보입니다.</li>
+                        <li>단순히 데이터를 많이 투입하는 것으로는 이 문제가 근본적으로 해결되지 않습니다.</li>
+                        <li>잘못된 법률 정보 제공은 사용자에게 심각한 피해를 초래할 수 있습니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="comparison-chart fade-in">
+                <h3>RAG vs Knowledge Graph RAG 비교</h3>
+                <pre class="mermaid">
+graph TD
+    subgraph "기존 RAG 시스템"
+        A1[사용자 질의] --> B1[텍스트 임베딩]
+        B1 --> C1[벡터 유사도 검색]
+        C1 --> D1[관련 문서 조각(Chunk) 검색]
+        D1 --> E1[단순 문맥 연결]
+        E1 --> F1[LLM 답변 생성]
+        F1 --> G1[답변]
+        H1[❌ 한계점]
+        H1 --> I1[키워드/유사도 매칭 중심]
+        H1 --> J1[관계 및 맥락 파악 불가]
+        H1 --> K1[환각 발생률 33% 이상]
+    end
+
+    subgraph "Knowledge Graph RAG (제안)"
+        A2[사용자 질의] --> B2[의도 분석 & 엔터티 추출]
+        B2 --> C2[지식 그래프 탐색 및 추론]
+        C2 --> D2[관계 기반 다중 홉 검색]
+        D2 --> E2[구조화된 맥락 구성]
+        E2 --> F2[LLM 답변 생성]
+        F2 --> G2[정확하고 근거있는 답변]
+        I2[✅ 장점]
+        I2 --> J2[의미 기반 검색 및 추론]
+        I2 --> K2[복잡한 관계망 이해]
+        I2 --> L2[환각 발생률 대폭 감소]
+    end
+
+    style A1 fill:#ffcccc; style G1 fill:#ffcccc;
+    style A2 fill:#ccffcc; style G2 fill:#ccffcc;
+</pre>
+            </div>
+
+            <div class="strategic-importance fade-in">
+                <h3>데이터 구조화의 전략적 중요성: '양'이 아닌 '질'의 문제</h3>
+                <p>
+                    현재 시스템의 핵심 문제는 데이터의 양이 부족해서가 아니라, 데이터 간의 <strong>관계</strong>가 정의되지 않았기 때문입니다. 단순히 더 많은 판례와 법령을 추가해도, 법률 조문 간의 참조 관계, 판례와 법령의 연결 관계, 개념의 위계 구조가 없다면 AI는 단편적인 정보의 나열에 그칠 수밖에 없습니다.
+                </p>
+                <p>
+                    <strong>Knowledge Graph 기반 데이터 구조화</strong>는 기존 데이터의 잠재 가치를 극대화하는 질적 혁신입니다. 현재 보유한 법령, 판례 데이터를 먼저 구조화하여 1+1=10의 효과를 내는 지능형 네트워크를 구축해야 합니다. 이 견고한 기반 위에서 신규 데이터를 체계적으로 통합할 때, 비로소 전체 시스템의 가치가 기하급수적으로 증가하는 네트워크 효과를 기대할 수 있습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="solution">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Knowledge Graph 기반 데이터 구조화 솔루션</h2>
+                <p>단순 데이터 수집을 넘어, 지능적 구조화를 통해 법률 AI의 근본적인 문제를 해결합니다.</p>
+            </div>
+            
+            <div class="diagram-container fade-in">
+                <h3>법률 도메인 Knowledge Graph 구조 예시</h3>
+                <pre class="mermaid">
+graph TB
+    subgraph "법률 개체 (Legal Entities)"
+        LD[법률 문서<br/>Legal Document]
+        LC[법률 개념<br/>Legal Concept]
+        LE[법률 주체<br/>Legal Entity]
+        CA[사건<br/>Case]
+        ST[법령<br/>Statute]
+        RG[규정<br/>Regulation]
+    end
+
+    subgraph "관계 (Relationships)"
+        LD ---|인용 CITES| CA
+        CA ---|무효화 OVERRULES| CA
+        ST ---|적용 APPLIES_TO| LE
+        CA ---|해석 INTERPRETS| ST
+        CA ---|관련 INVOLVES| LE
+        LD ---|정의 DEFINES| LC
+    end
+
+    style LD fill:#e1f5fe
+    style CA fill:#f3e5f5
+    style ST fill:#e8f5e8
+    style LE fill:#fff3e0
+</pre>
+            </div>
+
+            <div class="solution-process fade-in">
+                <div class="solution-step">
+                    <span class="phase-number" style="background:var(--solution-color); color:white;">1</span>
+                    <h4>법률 지식 온톨로지 설계</h4>
+                    <ul>
+                        <li>법률 개념 간의 관계(상하위, 인과, 참조 등)를 정의합니다.</li>
+                        <li>법령, 판례, 절차, 당사자, 권리 등 핵심 엔티티를 설정합니다.</li>
+                        <li>규칙 기반 추론 엔진의 기반을 마련합니다.</li>
+                    </ul>
+                </div>
+                <div class="solution-step">
+                    <span class="phase-number" style="background:var(--solution-color); color:white;">2</span>
+                    <h4>구조화된 데이터 변환</h4>
+                    <ul>
+                        <li>기존 텍스트 데이터에서 엔티티와 관계 정보를 자동으로 추출합니다.</li>
+                        <li>추출된 정보를 온톨로지 스키마에 맞춰 매핑하고 검증합니다.</li>
+                        <li>관계형 데이터가 아닌 지식 그래프 데이터베이스(Graph DB)를 구축합니다.</li>
+                    </ul>
+                </div>
+                <div class="solution-step">
+                    <span class="phase-number" style="background:var(--solution-color); color:white;">3</span>
+                    <h4>지능형 검색 및 추론</h4>
+                    <ul>
+                        <li>의미 기반 검색 알고리즘을 통해 정확한 정보를 찾습니다.</li>
+                        <li>다단계 추론으로 숨겨진 관계와 맥락을 파악합니다.</li>
+                        <li>근거가 명확한, 신뢰도 높은 답변을 생성합니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="diagram-container fade-in">
+                <h3>데이터 구조화 효과 비교</h3>
+                <pre class="mermaid">
+flowchart TD
+    subgraph "기존 방식: 비구조화 데이터"
+        A1[원시 텍스트] --> B1[단순 청킹]
+        B1 --> C1[벡터 임베딩]
+        C1 --> D1[유사도 검색]
+        D1 --> E1[❌ 관계 정보 손실]
+        E1 --> F1[❌ 맥락 단절]
+        F1 --> G1[❌ 부정확한 답변]
+    end
+
+    subgraph "제안 방식: Knowledge Graph 구조화"
+        A2[원시 텍스트] --> B2[엔터티 추출 & 관계 매핑]
+        B2 --> C2[그래프 구축]
+        C2 --> D2[관계 기반 추론]
+        D2 --> E2[✅ 관계 정보 보존]
+        E2 --> F2[✅ 다중 홉 추론]
+        F2 --> G2[✅ 정확한 답변]
+    end
+
+    style G1 fill:#ffcdd2
+    style G2 fill:#c8e6c9
+</pre>
+            </div>
+        </div>
+    </section>
+    
+    <section id="overview" class="overview">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>프로젝트 개요</h2>
+                <p>one-stop 법률구조에 필요한 국가법령정보센터, 대법원, 헌법재판소, 국회 등<br>
+                    다양한 공공 법률 정보를 하나로 통합하여 단계적 AI 법률지식서비스 개선 방안</p>
+            </div>
+
+            <div class="overview-content fade-in">
+                <div class="purpose-card">
+                    <h3>📌 목적 및 필요성</h3>
+                    <p>이용자가 자신의 사례에 적합한 법률구조서비스와 법률지식정보를 제공받을 수 있도록, AI 법률지식서비스 개선을 위한 방안을 모색</p>
+                    <ul>
+                        <li>한 곳에서 나의 법률문제를 해결할 수 있는 통합 플랫폼</li>
+                        <li>국민의 편의성 증진 및 참여기관의 업무능률 향상</li>
+                        <li>생성형 AI 기반 맞춤형 법률 지원 서비스 구현</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-timeline fade-in">
+                <h3>🚀 단계별 추진 전략</h3>
+                <div class="phase-flow">
+                    <div class="phase-item">
+                        <div class="phase-number">1</div>
+                        <div class="phase-card">
+                            <div class="phase-header short-term-min">
+                                <span class="phase-label">단기-최소</span>
+                                <span class="phase-period">2025년 6-8월</span>
+                            </div>
+                            <h4>법률 데이터 체계화</h4>
+                            <p>체계적 데이터 수집 및 구조화 기반 구축</p>
+                            <ul>
+                                <li>법령 정보 수집 자동화</li>
+                                <li>데이터 구조화 및 표준화</li>
+                                <li>Q&A 학습데이터셋 설계</li>
+                            </ul>
+                        </div>
+                        <div class="phase-arrow">→</div>
+                    </div>
+
+                    <div class="phase-item">
+                        <div class="phase-number">2</div>
+                        <div class="phase-card">
+                            <div class="phase-header short-term-opt">
+                                <span class="phase-label">단기-최적</span>
+                                <span class="phase-period">2025년 9-11월</span>
+                            </div>
+                            <h4>지능형 시스템 구축</h4>
+                            <p>Ontology 기반 RAG 고도화 및 Agent 개발</p>
+                            <ul>
+                                <li>Ontology 기반 지식 구조화</li>
+                                <li>RAG 시스템 고도화</li>
+                                <li>능동형 대화 Agent 개발</li>
+                            </ul>
+                        </div>
+                        <div class="phase-arrow">→</div>
+                    </div>
+
+                    <div class="phase-item">
+                        <div class="phase-number">3</div>
+                        <div class="phase-card">
+                            <div class="phase-header long-term">
+                                <span class="phase-label">중장기-최적</span>
+                                <span class="phase-period">2026년~</span>
+                            </div>
+                            <h4>One-Stop 법률구조 완성</h4>
+                            <p>차세대 통합 법률 지원 서비스</p>
+                            <ul>
+                                <li>전 분야 서비스 확대</li>
+                                <li>다채널 통합 플랫폼</li>
+                                <li>지속적 학습 체계</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="example" class="example">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기존 vs 개선된 AI 대화 방식 비교</h2>
+                <p>동일한 질문에 대한 현재 서비스와 개선된 서비스의 응답 차이를 확인해보세요</p>
+            </div>
+
+            <div class="comparison-container fade-in">
+                <div class="chat-wrapper">
+                    <div class="chat-container current">
+                        <div class="chat-header current-header">
+                            <h4>기존 법률똑똑이</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>안녕하세요</p>
+                                </div>
+                            </div>
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p>안녕하세요! 법률은 질의하신 사안과 정확하게 일치하는 사례가 아닙니다.</p>
+                                    <p style="margin-top: 0.5rem;">이는 참고용으로만 사용하시고...</p>
+                                    <div style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 10px;">
+                                        <p><strong>원하시는 법률상담은 아래 메뉴를 선택해주세요:</strong></p>
+                                        <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                                            <li style="padding: 0.5rem 0;">📋 주택·상가임대차</li>
+                                            <li style="padding: 0.5rem 0;">...</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="message user">
+                                <div class="message-bubble">
+                                    <p>주택임차인이 2년 미만으로 약정한 임차기간을 주장할 수 있는지</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p>주택임대차보호법 제4조 제1항에 따라, 임대차기간을 2년 미만으로 약정한 경우에도 임차인은 2년의 최소 주거안정기간을 보호받을 수 있습니다. 그러나...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-issues">
+                            <h5>❌ 문제점</h5>
+                            <ul>
+                                <li>복잡한 메뉴 선택 방식으로 접근성 저하</li>
+                                <li>사용자의 구체적 상황 파악 없이 일반론만 제시</li>
+                                <li>실질적인 해결 방안보다는 법조문 설명에 치중</li>
+                                <li>긴 면책 조항으로 시작하여 사용자 피로감 증가</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-wrapper">
+                    <div class="chat-container helplaw">
+                        <div class="chat-header helplaw-header">
+                            <h4>기존 Help law</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임대차 계약에 대해 알고 싶습니다.</p>
+                                </div>
+                            </div>
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                     <div class="message-label">Help law</div>
+                                    <p>임대차계약에 대한 주요 내용은 다음과 같습니다.</p>
+                                    <p style="margin-top:0.5rem;"><strong>임대차분쟁조정:</strong> 주택 또는 상가의 임대차와 관련된 분쟁을 해결하기 위해 임차인과 임대인 모두 신청할 수 있는 조정 절차가 있습니다...</p>
+                                </div>
+                            </div>
+                             <div class="message user">
+                                <div class="message-bubble">
+                                    <p>수수료 및 면제에서 특정 조건을 충족하면 무료로 진행 된다고 하는데, 특정 조건에 대해 설명해주세요.</p>
+                                </div>
+                            </div>
+                             <div class="message ai">
+                                <div class="message-bubble">
+                                     <div class="message-label">Help law</div>
+                                    <p>수수료 면제에 대한 조건은 다음과 같습니다: 
+                                    <br><strong>우선변제 임차인:</strong> 「주택임대차보호법」 제8조에 따라 우선변제를 받을 수 있는 임차인 경우...
+                                    <br><strong>국민기초생활 보장법 수급자...</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-issues helplaw">
+                            <h5 style="color:#f39c12">❌ 문제점</h5>
+                            <ul>
+                                <li>표면적 정보만 제공, 링크 나열에 그침</li>
+                                <li>상황별 맞춤형 대응 불가</li>
+                                <li>일방향 정보 전달, 추가 질문 유도 없음</li>
+                                <li>이전 대화와 연관된 질문에 대한 답변 불가 (일회성)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-wrapper">
+                    <div class="chat-container improved">
+                        <div class="chat-header">
+                            <h4>차세대 One-Stop 법률서비스</h4>
+                        </div>
+                        <div class="chat-messages">
+                             <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임대차계약에 대해 알고 싶습니다.</p>
+                                </div>
+                            </div>
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률서비스</div>
+                                    <p>네, 임대차계약에 대해 도와드리겠습니다.<br>
+                                        혹시 임대인(집주인)이신가요, 아니면 임차인(세입자)이신가요?</p>
+                                </div>
+                            </div>
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임차인입니다</p>
+                                </div>
+                            </div>
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률서비스</div>
+                                    <p>알겠습니다. 지금 살고 있는 집을 1년 전에 1년 계약으로 빌렸는데, 집주인이 계약기간이 끝났다며 집을 비워주거나 보증금을 올려달라고 요구하는 상황이 맞으실까요?</p>
+                                </div>
+                            </div>
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>네, 맞습니다.</p>
+                                </div>
+                            </div>
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률서비스</div>
+                                    <p><strong>네, 법규정과 판례를 통해 답변드리겠습니다.</strong></p>
+                                    <div class="info-box">
+                                        <p><strong>📋 주택임대차보호법 제4조</strong></p>
+                                        <p style="margin-top: 0.5rem; font-style: italic;">"기간을 정하지 아니하거나 2년 미만으로 정한 임대차는 그 기간을 2년으로 본다. 다만, 임차인은 2년 미만으로 정한 기간이 유효함을 주장할 수 있다"</p>
+                                    </div>
+                                    <div class="action-box">
+                                        <p><strong>💡 결론 및 대응방안</strong></p>
+                                        <p style="margin-top: 0.5rem;">따라서 임차인께서는 임대인에게 <strong>임대차계약기간이 아직 1년 남아있음</strong>을 이유로 임대인의 요구에 따르지 않을 수 있습니다.</p>
+                                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                            <strong>근거:</strong> 주택임대차보호법 제4조제1항, 대법원 2001. 9. 25. 선고 2000다24078 판결
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comparison-improvements">
+                            <h5>✅ 개선사항</h5>
+                            <ul>
+                                <li>능동적 질문으로 정확한 사실관계 확인</li>
+                                <li>자연스러운 대화를 통한 사용자 상황 파악</li>
+                                <li>법조문과 판례를 근거로 한 명확한 답변</li>
+                                <li>실질적이고 구체적인 해결방안 제시</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>AI 서비스 구조</h2>
+                <p>능동형 대화 Agent 모델 기반의 차세대 법률 지원 서비스 아키텍처</p>
+            </div>
+
+            <div class="arch-diagram fade-in">
+                <h3 style="text-align: center; margin-bottom: 3rem;">🏗️ 시스템 아키텍처</h3>
+                <div style="width: 100%; overflow-x: auto;">
+                     <svg width="1200" height="800" style="margin: 0 auto; display: block;">
+                        <defs>
+                            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#11998e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fc4a1a;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#f7b733;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="purpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+                                <feOffset dx="0" dy="2" result="offsetblur" />
+                                <feFlood flood-color="#000000" flood-opacity="0.1" />
+                                <feComposite in2="offsetblur" operator="in" />
+                                <feMerge>
+                                    <feMergeNode />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                            <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="12" refY="6" orient="auto">
+                                <path d="M 0 0 L 12 6 L 0 12 z" fill="#667eea" opacity="0.8" />
+                            </marker>
+                        </defs>
+                        <rect x="0" y="0" width="1200" height="800" fill="#f8f9fa" />
+                        <g>
+                            <rect x="20" y="20" width="1160" height="120" fill="white" stroke="#e0e0e0" stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="20" width="1160" height="40" fill="url(#blueGradient)" rx="15 15 0 0" opacity="0.1" />
+                            <text x="600" y="45" text-anchor="middle" font-size="16" font-weight="600" fill="#1a5490">사용자 접점 계층</text>
+                        </g>
+                        <g>
+                            <rect x="20" y="160" width="1160" height="140" fill="white" stroke="#e0e0e0" stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="160" width="1160" height="40" fill="url(#purpleGradient)" rx="15 15 0 0" opacity="0.1" />
+                            <text x="600" y="185" text-anchor="middle" font-size="16" font-weight="600" fill="#1a5490">능동형 대화 Agent 계층</text>
+                        </g>
+                        <g>
+                            <rect x="20" y="320" width="570" height="160" fill="white" stroke="#e0e0e0" stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="320" width="570" height="40" fill="url(#orangeGradient)" rx="15 15 0 0" opacity="0.1" />
+                            <text x="305" y="345" text-anchor="middle" font-size="16" font-weight="600" fill="#1a5490">핵심 AI 엔진</text>
+                        </g>
+                        <g>
+                            <rect x="610" y="320" width="570" height="160" fill="white" stroke="#e0e0e0" stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="610" y="320" width="570" height="40" fill="url(#greenGradient)" rx="15 15 0 0" opacity="0.1" />
+                            <text x="895" y="345" text-anchor="middle" font-size="16" font-weight="600" fill="#1a5490">AI 학습 및 평가 엔진</text>
+                        </g>
+                        <g>
+                            <rect x="20" y="500" width="1160" height="120" fill="white" stroke="#e0e0e0" stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="500" width="1160" height="40" fill="url(#purpleGradient)" rx="15 15 0 0" opacity="0.1" />
+                            <text x="600" y="525" text-anchor="middle" font-size="16" font-weight="600" fill="#1a5490">법률 지식 네트워크 (Knowledge Graph)</text>
+                        </g>
+                        <g>
+                            <rect x="20" y="640" width="1160" height="140" fill="white" stroke="#e0e0e0" stroke-width="1" rx="15" filter="url(#shadow)" />
+                            <rect x="20" y="640" width="1160" height="40" fill="url(#greenGradient)" rx="15 15 0 0" opacity="0.1" />
+                            <text x="600" y="665" text-anchor="middle" font-size="16" font-weight="600" fill="#1a5490">데이터 통합 계층</text>
+                        </g>
+                        <g transform="translate(300, 70)"><rect width="250" height="50" fill="#e8f0fe" stroke="#667eea" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="125" y="30" text-anchor="middle" font-size="14" fill="#1a5490">🌐 웹 플랫폼</text></g>
+                        <g transform="translate(650, 70)"><rect width="250" height="50" fill="#e8f0fe" stroke="#667eea" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="125" y="30" text-anchor="middle" font-size="14" fill="#1a5490">📱 모바일 앱</text></g>
+                        <g transform="translate(50, 210)"><rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">🎯 의도 분석 Agent</text></g>
+                        <g transform="translate(280, 210)"><rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">📊 정보 수집 Agent</text></g>
+                        <g transform="translate(510, 210)"><rect width="200" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="35" text-anchor="middle" font-size="14" fill="#4a148c">🧠 추론 Agent</text></g>
+                        <g transform="translate(730, 210)"><rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">💡 답변 생성 Agent</text></g>
+                        <g transform="translate(960, 210)"><rect width="210" height="60" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="105" y="35" text-anchor="middle" font-size="14" fill="#4a148c">✅ 품질 검증 Agent</text></g>
+                        <g transform="translate(50, 380)"><rect width="180" height="60" fill="#fff3e0" stroke="#ff6f00" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="90" y="35" text-anchor="middle" font-size="14" fill="#e65100">🤖 한국어 특화 LLM</text></g>
+                        <g transform="translate(250, 380)"><rect width="150" height="60" fill="#fff3e0" stroke="#ff6f00" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="75" y="35" text-anchor="middle" font-size="14" fill="#e65100">🔍 GraphRAG System</text></g>
+                        <g transform="translate(420, 370)"><ellipse cx="70" cy="85" rx="55" ry="8" fill="#000" opacity="0.1" /><defs><linearGradient id="dbGradient1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffecb3;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffc107;stop-opacity:1" /></linearGradient></defs><rect x="15" y="25" width="110" height="50" fill="url(#dbGradient1)" rx="2" /><ellipse cx="70" cy="25" rx="55" ry="12" fill="#ffecb3" /><ellipse cx="70" cy="25" rx="50" ry="10" fill="#fff8e1" /><ellipse cx="70" cy="75" rx="55" ry="12" fill="#ffc107" /><ellipse cx="55" cy="30" rx="15" ry="4" fill="#fff" opacity="0.4" /><text x="70" y="53" text-anchor="middle" font-size="13" font-weight="600" fill="#f57c00">Vector DB</text><text x="70" y="68" text-anchor="middle" font-size="11" fill="#ff8f00">Embeddings</text></g>
+                        <g transform="translate(670, 380)"><rect width="220" height="60" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="110" y="35" text-anchor="middle" font-size="14" fill="#1b5e20">📝 학습데이터 생성기</text></g>
+                        <g transform="translate(920, 380)"><rect width="220" height="60" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="110" y="35" text-anchor="middle" font-size="14" fill="#1b5e20">🔄 모델 학습 파이프라인</text></g>
+                        <g transform="translate(150, 550)"><rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">📚 법령 온톨로지</text></g>
+                        <g transform="translate(380, 550)"><rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">⚖️ 판례 관계망</text></g>
+                        <g transform="translate(610, 550)"><rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">🔀 절차 플로우</text></g>
+                        <g transform="translate(840, 550)"><rect width="200" height="50" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#4a148c">🕸️ 개념 네트워크</text></g>
+                        <g transform="translate(150, 704)"><rect width="200" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#1b5e20">🏛️ 법령정보센터 API</text></g>
+                        <g transform="translate(380, 704)"><rect width="200" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#1b5e20">⚖️ 대법원 시스템</text></g>
+                        <g transform="translate(610, 680)"><ellipse cx="100" cy="85" rx="75" ry="10" fill="#000" opacity="0.1" /><defs><linearGradient id="dbGradient2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#c8e6c9;stop-opacity:1" /><stop offset="100%" style="stop-color:#4caf50;stop-opacity:1" /></linearGradient></defs><rect x="25" y="20" width="150" height="55" fill="url(#dbGradient2)" rx="2" /><ellipse cx="100" cy="20" rx="75" ry="15" fill="#c8e6c9" /><ellipse cx="100" cy="20" rx="70" ry="13" fill="#e8f5e9" /><ellipse cx="100" cy="75" rx="75" ry="15" fill="#4caf50" /><ellipse cx="80" cy="25" rx="20" ry="5" fill="#fff" opacity="0.4" /><line x1="40" y1="35" x2="160" y2="35" stroke="#2e7d32" stroke-width="1" opacity="0.3" /><line x1="40" y1="45" x2="160" y2="45" stroke="#2e7d32" stroke-width="1" opacity="0.3" /><line x1="40" y1="55" x2="160" y2="55" stroke="#2e7d32" stroke-width="1" opacity="0.3" /><text x="100" y="50" text-anchor="middle" font-size="13" font-weight="600" fill="#1b5e20">내부 상담 DB</text><text x="100" y="65" text-anchor="middle" font-size="11" fill="#2e7d32">110만 건</text></g>
+                        <g transform="translate(840, 704)"><rect width="200" height="50" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5" rx="8" filter="url(#shadow)" /><text x="100" y="30" text-anchor="middle" font-size="14" fill="#1b5e20">📊 추가 학습데이터</text></g>
+                        <path d="M 600 140 L 600 160" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.6" />
+                        <path d="M 380 300 L 380 320" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.6" />
+                        <path d="M 820 300 L 820 320" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.6" />
+                        <path d="M 305 480 L 305 500" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.6" />
+                        <path d="M 895 480 L 895 500" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.6" />
+                        <path d="M 600 620 L 600 640" stroke="#667eea" stroke-width="2" marker-end="url(#arrowhead)" opacity="0.6" />
+                    </svg>
+                </div>
+                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #666;">
+                    능동형 대화 Agent 기반의 차세대 법률 지원 서비스 아키텍처
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="data" class="data-collection">
+         <div class="container">
+            <div class="section-header fade-in">
+                <h2>데이터 수집 및 관리 방안</h2>
+                <p>체계적인 데이터 수집과 관리를 통한 고품질 법률 지식베이스 구축</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>단계별 구현 일정</h2>
+                <p>2025년 6월부터 2026년까지 체계적인 단계별 구현을 통한 서비스 고도화</p>
+            </div>
+
+            <div class="timeline-container fade-in">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">1단계: 단기-최소</div>
+                        <div class="timeline-date">2025년 6-8월 (3개월)</div>
+                        <h4>법률 데이터 체계화 및 기반 구축</h4>
+                        <ul>
+                            <li>법령 정보 수집 및 구조화 체계 구축</li>
+                            <li>데이터 표준화 및 품질 관리 프로세스</li>
+                            <li>Q&A 기반 학습데이터셋 설계</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">2단계: 단기-최적</div>
+                        <div class="timeline-date">2025년 9-11월 (3개월)</div>
+                        <h4>지능형 시스템 및 RAG 고도화</h4>
+                        <ul>
+                            <li>Ontology 기반 법률 지식 구조화</li>
+                            <li>RAG 시스템 고도화 및 최적화</li>
+                            <li>능동형 대화 Agent 모델 개발</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">3단계: 중장기-최적</div>
+                        <div class="timeline-date">2026년~ (후속사업)</div>
+                        <h4>One-Stop 법률구조 완성</h4>
+                        <ul>
+                            <li>문제 해결 중심 대화형 AI Assistant</li>
+                            <li>상담·구조·조정·피해구제 통합</li>
+                            <li>전 법률 분야로 서비스 확대</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기대 효과</h2>
+                <p>AI 기술을 통한 법률 서비스의 혁신적 개선</p>
+            </div>
+
+            <div class="solution-features fade-in">
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <h3>대국민 서비스 향상</h3>
+                    <ul>
+                        <li>법률 정보 접근성 획기적 개선</li>
+                        <li>개인 맞춤형 법률 지원</li>
+                        <li>24시간 전문적 상담 가능</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>업무 효율성 증대</h3>
+                    <ul>
+                        <li>상담원 업무 최적화</li>
+                        <li>표준화된 정보 제공</li>
+                        <li>신속한 초기 대응</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>법률 서비스 혁신</h3>
+                    <ul>
+                        <li>AI 기반 공공 서비스 표준</li>
+                        <li>예방적 법률 지원</li>
+                        <li>지속적 품질 향상</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>프로젝트 문의</h2>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="imgs/ali_logo.png" alt="자치법연구원 로고">
+                    <h4>자치법연구원</h4>
+                    <p><strong>강지선 연구위원</strong><br>
+                        📧 thewarmsoul@daum.net<br>
+                        📞 010-9473-7685</p>
+                </div>
+                <div class="contact-item">
+                    <img src="imgs/poi_logo.png" alt="포이 로고">
+                    <h4>주식회사 포이</h4>
+                    <p><strong>김명석 과장</strong><br>
+                        📧 paul.kim@poi.so<br>
+                        📞 010-2819-1202</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mermaid.js 초기화
+        mermaid.initialize({ startOnLoad: true });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileMenuToggle && mobileNav) {
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.toggle('active');
+                if (mobileNav.classList.contains('active')) {
+                    mobileMenuToggle.textContent = '✕';
+                } else {
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                });
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!mobileNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
+```
