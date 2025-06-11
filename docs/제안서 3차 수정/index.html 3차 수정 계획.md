@@ -125,6 +125,9 @@
 - **맥락 보존**: 법률 개념의 **계층구조와 상호관계**를 명시적으로 표현
 - **추론 기반 답변**: 구조화된 관계 정보를 바탕으로 한 논리적 추론 과정 지원
 
+**다) 법률지식 그래프 구조 예시**
+- index_ver2.html의 법률 지식 그래프 모양 구조를 그대로 작성
+
 ### 4.2 구조화 시 기대 효과
 
 **가) 1+1=10의 기하급수적 효과**
@@ -178,12 +181,71 @@
 
 ## 🏢 6. 포이 회사 소개
 
-### 6.1 회사 개요
-### 6.2 인력 및 조직 구성
-    - 인공지능 개발자 3명, 디자이너 1명
-### 6.3 기술 역량 및 특화 분야
+### 6.1 기술 역량
+**데이터 구조화 및 지능형 분석**
+- 대규모 비정형 데이터 구조화 (텍스트, 이미지, 센서 데이터)
+- 데이터 관계 모델링
+- 비지도학습 기반 패턴 발견 및 이상 탐지
 
-### 6.4 주요 프로젝트 실적 및 내용
+**생성형 AI 및 자연어 처리**  
+- RAG(Retrieval-Augmented Generation) 시스템 구축
+- 대화형 AI 및 자동화된 콘텐츠 생성
+- 도메인 특화 언어모델 파인튜닝
 
+**실시간 데이터 처리 및 플랫폼 구축**
+- 스트리밍 데이터 실시간 분석 시스템
+- 클라우드 네이티브 아키텍처 설계
+- 의료·산업 분야 전문 AI 솔루션 개발
+
+### 6.2 주요 프로젝트 실적
+
+**1) 서울아산병원 CDE 프로젝트**
+<div style="display: flex; align-items: center; border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px;">
+<div style="flex: 1;">
+- **배경**: 신경과 진료 진단 양식 표준화 연구 프로젝트
+- **데이터 구조화**: MRI 진단 데이터 표준 양식 설계 및 구조화
+- **AI 적용**: 생성형 AI 직접 학습을 통한 MRI 판독 AI 개발
+- **성과**: 실제 의료진 사용 가능한 판독 AI 구현, 논문 작성 진행 중
+</div>
+</div>
+
+**2) 한국능률협회 TREND M 구축 프로젝트**
+<div style="display: flex; align-items: center; border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px;">
+<div style="flex: 1; margin-right: 20px;">
+- **배경**: 비즈니스 이슈 추적 및 분석을 위한 트렌드 분석 플랫폼
+- **데이터 구조화**: 일일 수만 개 뉴스기사 자동 수집 및 카테고리별 분류
+- **AI 적용**: 생성형 AI와 대량언어모델 기반 트렌드 패턴 분석
+- **성과**: 실시간 트렌드 추적 및 비즈니스 인사이트 자동 생성 시스템 구축
+</div>
+<div style="flex: 0 0 200px;">
+<img src="imgs/trendm.png" alt="TREND M 시스템" style="width: 100%; border-radius: 4px;">
+</div>
+</div>
+
+**3) 정부지원사업 공고 수집 및 검색 시스템**
+<div style="display: flex; align-items: center; border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px;">
+<div style="flex: 1; margin-right: 20px;">
+- **배경**: 다양한 정부기관 지원사업 정보 통합 검색 플랫폼
+- **데이터 구조화**: 서로 다른 구조의 공고 데이터를 통일된 형태로 구조화
+- **AI 적용**: 생성형 AI를 통한 공고 내용 분석 및 자동 구조화
+- **성과**: 다중 기관 데이터 통합으로 사용자 맞춤형 정보 제공 시스템 완성
+</div>
+<div style="flex: 0 0 200px;">
+<img src="imgs/valueadd.png" alt="정부지원사업 검색 시스템" style="width: 100%; border-radius: 4px;">
+</div>
+</div>
+
+**4) 센서데이터 통합 분석 플랫폼 (PoiFlow)**
+<div style="display: flex; align-items: center; border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px;">
+<div style="flex: 1; margin-right: 20px;">
+- **배경**: 산업 현장 다변량 센서 데이터 패턴 분석 시스템
+- **데이터 구조화**: 비지도학습 기반 센서 데이터 자동 패턴 발견 및 분류
+- **AI 적용**: 센서데이터의 스트리밍 처리를 결합한 지능형 패턴 해석 시스템
+- **성과**: 다변량 센서 데이터 자동 패턴 발견으로 전문가 의존적 분석 방식 혁신, 다중 산업 도메인 적용 가능한 범용 플랫폼 구축
+</div>
+<div style="flex: 0 0 200px;">
+<img src="imgs/poiflow.png" alt="PoiFlow 시스템" style="width: 100%; border-radius: 4px;">
+</div>
+</div>
 
 ---

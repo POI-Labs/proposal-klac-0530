@@ -1,0 +1,3728 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법률구조서비스 플랫폼 개선 제안서 | 자치법연구원 X 포이</title>
+    <style>
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Paperlogy-8ExtraBold';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Pretendard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        :root {
+            --primary-color: #1a5490;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --warning-color: #f39c12;
+            --success-color: #27ae60;
+            --dark-bg: #1a1a2e;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Paperlogy-8ExtraBold', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-logos img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            padding: 0.5rem;
+            z-index: 1002;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-content {
+            padding: 5rem 2rem 2rem;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff20" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+            background-size: cover;
+            animation: wave 20s linear infinite;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--text-light);
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .policy-badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .policy-badge span:first-child {
+            font-weight: 600;
+            padding-right: 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .proposer-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .proposer {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .proposer img {
+            height: 30px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--text-light);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Warning colors for problems */
+        .warning-bg {
+            background: #fff5f5;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .success-bg {
+            background: #f0fff4;
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">법률구조서비스 플랫폼 개선 제안</div>
+            <ul class="nav-links">
+                <li><a href="#current">현황</a></li>
+                <li><a href="#solution">솔루션</a></li>
+                <li><a href="#overview">개요</a></li>
+                <li><a href="#example">예시</a></li>
+                <li><a href="#architecture">구조</a></li>
+                <li><a href="#timeline">일정</a></li>
+                <li><a href="#contact">문의</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-content">
+            <ul class="mobile-nav-links">
+                <li><a href="#current" class="mobile-nav-link">현황</a></li>
+                <li><a href="#solution" class="mobile-nav-link">솔루션</a></li>
+                <li><a href="#overview" class="mobile-nav-link">개요</a></li>
+                <li><a href="#example" class="mobile-nav-link">예시</a></li>
+                <li><a href="#architecture" class="mobile-nav-link">구조</a></li>
+                <li><a href="#timeline" class="mobile-nav-link">일정</a></li>
+                <li><a href="#contact" class="mobile-nav-link">문의</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>법률구조서비스 플랫폼<br>개선 제안서</h1>
+            <p class="hero-subtitle">One-Stop 맞춤형 법률구조 서비스 구현을 위한 AI 고도화 전략</p>
+            <div class="policy-badge">
+                <span>국정과제 64-5</span>
+                <span>법률구조서비스플랫폼 구축 및 사회적 취약계층 우선지원</span>
+            </div>
+            <div class="proposer-info">
+                <div class="proposer">
+                    <img src="imgs/ali_logo.png" alt="자치법연구원 로고">
+                    <span>자치법연구원</span>
+                </div>
+                <div class="proposer">
+                    <img src="imgs/poi_logo.png" alt="포이 로고">
+                    <span>주식회사 포이</span>
+                </div>
+            </div>
+            <a href="#current" class="cta-button">제안서 살펴보기</a>
+        </div>
+    </section>
+
+    <!-- Current Issues Section -->
+    <section id="current" class="current-status warning-bg">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기존 RAG 시스템의 근본적 한계</h2>
+                <p>단순 텍스트 유사도 기반 검색으로는 법률 분야의 복잡한 추론과<br>
+                    정확한 정보 제공이 한계에 도달</p>
+            </div>
+
+            <div class="problem-analysis fade-in">
+                <h3 style="text-align: center; color: var(--accent-color); margin-bottom: 3rem;">⚠️ 핵심 문제점 3가지</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">🎯</div>
+                        <h4>의미적 연관성 부족</h4>
+                        <div class="problem-details">
+                            <p><strong>현상:</strong> 키워드 매칭 중심의 단순 검색</p>
+                            <p><strong>한계:</strong> 법령-판례-절차 간의 논리적 연관관계 파악 불가</p>
+                            <p><strong>결과:</strong> 관련 없는 정보 제공, 맥락 무시</p>
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">🗂️</div>
+                        <h4>구조화되지 않은 정보 처리</h4>
+                        <div class="problem-details">
+                            <p><strong>현상:</strong> 비정형 텍스트 덩어리로만 학습</p>
+                            <p><strong>한계:</strong> 법률 개념 간의 계층구조와 상호관계 무시</p>
+                            <p><strong>결과:</strong> 추상적이고 일반적인 답변만 가능</p>
+                        </div>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">⚠️</div>
+                        <h4>환각(Hallucination) 문제 심각</h4>
+                        <div class="problem-details">
+                            <p><strong>현상:</strong> 법률 AI 도구 환각 33% 이상 발생</p>
+                            <p><strong>한계:</strong> 아무리 많은 데이터를 투입해도 근본적 해결 불가</p>
+                            <p><strong>결과:</strong> 잘못된 법률 정보 제공으로 인한 심각한 결과 초래</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hallucination-stats fade-in">
+                <h3 style="text-align: center; color: var(--accent-color); margin-bottom: 2rem;">📊 법률 AI 환각 발생률 (스탠포드 대학 연구)</h3>
+                <div class="stats-container">
+                    <div class="stat-chart">
+                        <div class="pie-chart">
+                            <div class="pie-slice correct" data-percent="67"></div>
+                            <div class="pie-slice hallucination" data-percent="33"></div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color correct"></span>
+                                <span>정확한 답변 67%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color hallucination"></span>
+                                <span>환각 발생 33%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-description">
+                        <p><strong>법률 분야에서 AI 환각 문제의 심각성</strong></p>
+                        <ul>
+                            <li>일반 분야 대비 <strong>3배 높은</strong> 환각 발생률</li>
+                            <li>잘못된 법률 정보는 <strong>경제적, 법적 손실</strong> 직결</li>
+                            <li>단순 데이터 추가로는 <strong>근본적 해결 불가</strong></li>
+                            <li>구조화된 접근법 필요성 대두</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-table fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">🔄 기존 RAG vs Knowledge Graph RAG 비교</h3>
+                <div class="table-wrapper">
+                    <table class="comparison-table-style">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th class="current-system">기존 RAG 시스템</th>
+                                <th class="proposed-system">Knowledge Graph RAG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>검색 방식</strong></td>
+                                <td class="current-system">텍스트 유사도 기반</td>
+                                <td class="proposed-system">의미 기반 관계 탐색</td>
+                            </tr>
+                            <tr>
+                                <td><strong>정보 연결</strong></td>
+                                <td class="current-system">단편적 문서 검색</td>
+                                <td class="proposed-system">다중 홉 관계 추론</td>
+                            </tr>
+                            <tr>
+                                <td><strong>정확도</strong></td>
+                                <td class="current-system">환각 발생 33%</td>
+                                <td class="proposed-system">구조화로 환각 대폭 감소</td>
+                            </tr>
+                            <tr>
+                                <td><strong>확장성</strong></td>
+                                <td class="current-system">선형적 개선</td>
+                                <td class="proposed-system">네트워크 효과로 기하급수적 향상</td>
+                            </tr>
+                            <tr>
+                                <td><strong>법률 추론</strong></td>
+                                <td class="current-system">불가능</td>
+                                <td class="proposed-system">논리적 추론 경로 제공</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="system-flow-comparison fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">🔄 시스템 동작 방식 비교</h3>
+                <div class="flow-comparison">
+                    <div class="flow-column">
+                        <h4 class="flow-title current">기존 RAG 시스템</h4>
+                        <div class="flow-steps">
+                            <div class="flow-step current">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>사용자 질의</h5>
+                                    <p>단순 텍스트 입력</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step current">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>텍스트 임베딩</h5>
+                                    <p>벡터 변환</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step current">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>유사도 검색</h5>
+                                    <p>가장 비슷한 문서 검색</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step current">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>단순 문맥 연결</h5>
+                                    <p>관계 파악 불가</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step current problem">
+                                <div class="step-number">❌</div>
+                                <div class="step-content">
+                                    <h5>환각 위험 높음</h5>
+                                    <p>키워드 매칭 중심의 부정확한 답변</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flow-column">
+                        <h4 class="flow-title proposed">Knowledge Graph RAG</h4>
+                        <div class="flow-steps">
+                            <div class="flow-step proposed">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h5>사용자 질의</h5>
+                                    <p>의도 분석 & 엔터티 추출</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step proposed">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h5>지식 그래프 탐색</h5>
+                                    <p>의미 기반 관계 탐색</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step proposed">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h5>관계 기반 추론</h5>
+                                    <p>다중 홉 연결 탐색</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step proposed">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h5>구조화된 맥락</h5>
+                                    <p>논리적 연관관계 파악</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-step proposed success">
+                                <div class="step-number">✅</div>
+                                <div class="step-content">
+                                    <h5>정확한 답변</h5>
+                                    <p>근거 기반의 신뢰할 수 있는 정보</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Current Issues Section Styles */
+        .current-status {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            position: relative;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .problem-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .problem-details p {
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .problem-details strong {
+            color: var(--accent-color);
+        }
+
+        /* Hallucination Stats */
+        .hallucination-stats {
+            margin-top: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .pie-chart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(#27ae60 0deg 241.2deg, #e74c3c 241.2deg 360deg);
+            margin: 0 auto 2rem;
+        }
+
+        .chart-legend {
+            text-align: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .legend-color.correct {
+            background: #27ae60;
+        }
+
+        .legend-color.hallucination {
+            background: #e74c3c;
+        }
+
+        .stat-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .stat-description li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .stat-description li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            margin-top: 4rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table-style {
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+        }
+
+        .comparison-table-style th {
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 600;
+            color: white;
+        }
+
+        .comparison-table-style th:first-child {
+            background: var(--primary-color);
+        }
+
+        .comparison-table-style th:nth-child(2),
+        .comparison-table-style th:nth-child(3) {
+            background: var(--primary-color);
+        }
+
+        .comparison-table-style td {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+            background: white;
+            color: #333;
+        }
+
+        .comparison-table-style tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Flow Comparison */
+        .system-flow-comparison {
+            margin-top: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .flow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .flow-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .flow-title.current {
+            background: #fff5f5;
+            color: var(--accent-color);
+        }
+
+        .flow-title.proposed {
+            background: #f0fff4;
+            color: var(--success-color);
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .flow-step:hover {
+            transform: translateX(5px);
+        }
+
+        .flow-step.current {
+            background: #fff5f5;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .flow-step.proposed {
+            background: #f0fff4;
+            border-left: 4px solid #27ae60;
+        }
+
+        .flow-step.problem {
+            background: #ffebee;
+            border-left: 4px solid #d32f2f;
+        }
+
+        .flow-step.success {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .flow-step.current .step-number {
+            background: #e74c3c;
+        }
+
+        .flow-step.proposed .step-number {
+            background: #27ae60;
+        }
+
+        .flow-step.problem .step-number {
+            background: #d32f2f;
+        }
+
+        .flow-step.success .step-number {
+            background: #4caf50;
+        }
+
+        .step-content h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .step-content p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #666;
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 968px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .flow-comparison {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .comparison-table-style {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table-style th,
+            .comparison-table-style td {
+                padding: 1rem;
+            }
+
+            /* Legal Knowledge Graph Mobile */
+            .legal-knowledge-graph {
+                height: 600px;
+                padding: 10px;
+            }
+
+            .graph-node {
+                min-width: 100px;
+                padding: 12px;
+            }
+
+            .node-icon {
+                font-size: 1.8rem;
+                margin-bottom: 5px;
+            }
+
+            .node-title {
+                font-size: 0.9rem;
+            }
+
+            .node-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .node-properties {
+                padding: 6px;
+            }
+
+            .node-properties div {
+                font-size: 0.7rem;
+                margin-bottom: 2px;
+            }
+
+            /* 모바일 노드 위치 조정 */
+            .center-case {
+                top: 280px !important;
+                left: 200px !important;
+                transform: scale(1.0);
+            }
+
+            .legal-document {
+                top: 80px !important;
+                left: 80px !important;
+            }
+
+            .legal-concept {
+                top: 50px !important;
+                left: 250px !important;
+            }
+
+            .statute {
+                top: 80px !important;
+                left: 420px !important;
+            }
+
+            .legal-entity {
+                top: 280px !important;
+                left: 30px !important;
+            }
+
+            .regulation {
+                top: 280px !important;
+                left: 370px !important;
+            }
+
+            .legal-principle {
+                top: 450px !important;
+                left: 350px !important;
+            }
+
+            .citation {
+                top: 500px !important;
+                left: 200px !important;
+            }
+
+            .case-relation {
+                top: 450px !important;
+                left: 50px !important;
+            }
+
+            .relation-label {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+                border-radius: 8px;
+            }
+
+            .legend-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .legend-item {
+                padding: 6px 8px;
+            }
+
+            .legend-item span {
+                font-size: 0.8rem;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kg-process-flow {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .kg-stage {
+                min-height: 400px;
+            }
+
+            .kg-connection-flow {
+                margin: 1rem 0;
+                min-width: auto;
+            }
+
+            .kg-connection-line {
+                width: 3px;
+                height: 50px;
+                background: linear-gradient(180deg, #74b9ff, #fd79a8);
+            }
+
+            .kg-connection-line::after {
+                content: '▼';
+                right: auto;
+                left: 50%;
+                top: auto;
+                bottom: -10px;
+                transform: translateX(-50%);
+            }
+
+            .process-flow {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .effect-comparison {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .explore-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+                 }
+        
+        @media (max-width: 768px) {
+            /* Legal Knowledge Graph Mobile Small */
+            .legal-knowledge-graph {
+                height: 500px;
+                padding: 8px;
+            }
+
+            .graph-node {
+                min-width: 80px;
+                padding: 8px;
+            }
+
+            .node-icon {
+                font-size: 1.5rem;
+                margin-bottom: 3px;
+            }
+
+            .node-title {
+                font-size: 0.8rem;
+            }
+
+            .node-subtitle {
+                font-size: 0.65rem;
+            }
+
+            .node-properties {
+                padding: 4px;
+                font-size: 0.6rem;
+            }
+
+            .node-properties div {
+                font-size: 0.6rem;
+                margin-bottom: 1px;
+            }
+
+            /* 모바일 작은 화면 노드 위치 조정 */
+            .center-case {
+                top: 230px !important;
+                left: 160px !important;
+                transform: scale(0.9);
+            }
+
+            .legal-document {
+                top: 70px !important;
+                left: 60px !important;
+            }
+
+            .legal-concept {
+                top: 40px !important;
+                left: 180px !important;
+            }
+
+            .statute {
+                top: 70px !important;
+                left: 300px !important;
+            }
+
+            .legal-entity {
+                top: 230px !important;
+                left: 20px !important;
+            }
+
+            .regulation {
+                top: 230px !important;
+                left: 300px !important;
+            }
+
+            .legal-principle {
+                top: 380px !important;
+                left: 250px !important;
+            }
+
+            .citation {
+                top: 420px !important;
+                left: 160px !important;
+            }
+
+            .case-relation {
+                top: 380px !important;
+                left: 40px !important;
+            }
+
+            .relation-label {
+                font-size: 0.6rem;
+                padding: 2px 6px;
+                border-radius: 6px;
+                display: none; /* 화면이 너무 작을 때는 라벨 숨기기 */
+            }
+
+            .legend-grid {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
+            }
+
+            .legend-item {
+                padding: 4px 6px;
+            }
+
+            .legend-item span {
+                font-size: 0.7rem;
+            }
+
+            .graph-legend h4 {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .explore-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+     </style>
+
+    <!-- Solution Section -->
+    <section id="solution" class="solution success-bg">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Knowledge Graph 기반 데이터 구조화 솔루션</h2>
+                <p>단순 데이터 수집이 아닌, 지능적 구조화를 통한 근본적 해결</p>
+            </div>
+
+            <div class="solution-overview fade-in">
+                <div class="solution-hero">
+                    <h3>📊 데이터 구조화가 모든 문제의 해답</h3>
+                    <p class="solution-subtitle">기존 데이터의 잠재 가치를 최대한 활용한 후, 이를 토대로 신규 데이터를 체계적으로 통합하는 것이 가장 효율적이고 지속가능한 발전 전략입니다.</p>
+                </div>
+            </div>
+
+            <div class="data-value-explanation fade-in">
+                <h3 style="text-align: center; color: var(--success-color); margin-bottom: 3rem;">💎 기존 데이터 구조화의 전략적 가치</h3>
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon">📈</div>
+                        <h4>1+1=10의 효과</h4>
+                        <p>동일한 데이터량이지만 조문 간 참조관계, 판례-법령 연결관계, 개념 위계구조를 명시적으로 표현함으로써 데이터의 활용 가치가 <strong>기하급수적으로 증가</strong></p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h4>정확성과 완전성 동시 확보</h4>
+                        <p>단순 데이터 추가는 양적 확장이지만, 구조화는 질적 혁신. 관련 법령과 판례를 관계망으로 연결하여 체계적으로 제공</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🚀</div>
+                        <h4>네트워크 효과</h4>
+                        <p>구조화 없이 데이터만 추가하면 선형적 개선에 그치지만, 먼저 구조화 기반을 다진 후 데이터를 확장하면 전체 시스템의 가치가 급격히 증가</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-graph-structure fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">🕸️ 법률 지식 그래프 구조</h3>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem;">방사형 구조로 표현된 법률 개체 간의 관계망</p>
+                
+                <div class="legal-knowledge-graph">
+                    <!-- SVG 연결선 -->
+                    <svg class="graph-connections" viewBox="0 0 1000 800">
+                        <!-- 법률 문서 → 법률 개념 (정의 DEFINES) -->
+                        <path d="M 250 200 Q 350 175 450 150" stroke="#9b59b6" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 법률 문서 → 사건 (인용 CITES) -->
+                        <path d="M 280 230 Q 390 320 450 370" stroke="#4a90e2" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 사건 → 법적 원칙 (확립 ESTABLISHES) -->
+                        <path d="M 550 430 Q 650 530 700 580" stroke="#e91e63" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 사건 → 법령 (해석 INTERPRETS) -->
+                        <path d="M 550 380 Q 650 280 700 230" stroke="#27ae60" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 사건 → 법적 개체 (관련 INVOLVES) -->
+                        <path d="M 450 450 Q 325 450 200 450" stroke="#f1c40f" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 사건 → 인용 (선례 IS_PRECEDENT_FOR) -->
+                        <path d="M 500 450 Q 500 550 500 600" stroke="#1abc9c" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 법령 → 법적 개체 (적용 APPLIES_TO) -->
+                        <path d="M 700 250 Q 450 320 200 400" stroke="#2ecc71" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+
+                        <!-- 사건 → 규정 (적용/위반) -->
+                        <path d="M 550 420 Q 750 420 850 420" stroke="#ff6b6b" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+
+
+
+                    </svg>
+                    
+                    <!-- 중심 노드 - 사건 -->
+                    <div class="graph-node center-case" style="top: 350px; left: 450px;">
+                        <div class="node-icon">⚖️</div>
+                        <div class="node-title">사건</div>
+                        <div class="node-subtitle">Case</div>
+                        <div class="node-description">사건번호, 사건명<br>법원, 판결일</div>
+                    </div>
+                    
+                    <!-- 균등 방사형 배치 노드들 -->
+                    <div class="graph-node legal-document" style="top: 130px; left: 200px;">
+                        <div class="node-icon">📄</div>
+                        <div class="node-title">법률 문서</div>
+                        <div class="node-subtitle">Legal Document</div>
+                        <div class="node-description">제목, 문서ID<br>발행일, 관할권</div>
+                    </div>
+                    
+                    <div class="graph-node legal-concept" style="top: 100px; left: 450px;">
+                        <div class="node-icon">💡</div>
+                        <div class="node-title">법률 개념</div>
+                        <div class="node-subtitle">Legal Concept</div>
+                        <div class="node-description">개념명, 정의<br>적용범위</div>
+                    </div>
+                    
+                    <div class="graph-node statute" style="top: 130px; left: 700px;">
+                        <div class="node-icon">📄</div>
+                        <div class="node-title">법령</div>
+                        <div class="node-subtitle">Statute</div>
+                        <div class="node-description">법령번호, 제목<br>장, 조, 시행일</div>
+                    </div>
+                    
+                    <div class="graph-node regulation" style="top: 350px; left: 800px;">
+                        <div class="node-icon">📋</div>
+                        <div class="node-title">규정</div>
+                        <div class="node-subtitle">Regulation</div>
+                        <div class="node-description">규정번호, 제목<br>적용범위</div>
+                    </div>
+                    
+                    <div class="graph-node legal-principle" style="top: 570px; left: 700px;">
+                        <div class="node-icon">⚡</div>
+                        <div class="node-title">법적 원칙</div>
+                        <div class="node-subtitle">Legal Principle</div>
+                        <div class="node-description">원칙명, 적용영역</div>
+                    </div>
+                    
+                    <div class="graph-node citation" style="top: 600px; left: 450px;">
+                        <div class="node-icon">🔗</div>
+                        <div class="node-title">인용</div>
+                        <div class="node-subtitle">Citation</div>
+                        <div class="node-description">인용유형, 참조</div>
+                    </div>
+                    
+                    
+                    <div class="graph-node legal-entity" style="top: 350px; left: 100px;">
+                        <div class="node-icon">🏢</div>
+                        <div class="node-title">법률 개체</div>
+                        <div class="node-subtitle">Legal Entity</div>
+                        <div class="node-description">개체명, 개체유형<br>역할, 관할권</div>
+                    </div>
+                    
+                    <!-- 검은색 말풍선 형태 관계 라벨들 -->
+                    <!-- 법률 문서 → 법률 개념 (정의 DEFINES) -->
+                    <div class="relation-bubble" style="top: 135px; left: 350px;">정의 </div>
+                    
+                    <!-- 법률 문서 → 사건 (인용 CITES) -->
+                    <div class="relation-bubble" style="top: 250px; left: 365px;">인용 </div>
+                    
+                    <!-- 사건 → 법적 원칙 (확립 ESTABLISHES) -->
+                    <div class="relation-bubble" style="top: 505px; left: 655px;">확립 </div>
+                    
+                    <!-- 사건 → 법령 (해석 INTERPRETS) -->
+                    <div class="relation-bubble" style="top: 305px; left: 595px;">해석 </div>
+                    
+                    <!-- 사건 → 법적 개체 (관련 INVOLVES) -->
+                    <div class="relation-bubble" style="top: 415px; left: 325px;">관련 </div>
+                    
+                    <!-- 사건 → 인용 (선례 IS_PRECEDENT_FOR) -->
+                    <div class="relation-bubble" style="top: 555px; left: 500px;">선례 </div>
+                    
+                    <!-- 법령 → 법적 개체 (적용 APPLIES_TO) -->
+                    <div class="relation-bubble" style="top: 285px; left: 450px;">적용 </div>
+                </div>
+                
+                <!-- 범례 섹션 -->
+                
+            </div>
+
+            <div class="implementation-process fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">🔧 Knowledge Graph 구축 프로세스</h3>
+                <div class="process-flow">
+                    <div class="process-phase phase-1">
+                        <div class="phase-header">
+                            <div class="phase-number">1</div>
+                            <h4>법률 지식 온톨로지 설계</h4>
+                        </div>
+                        <div class="phase-content">
+                            <div class="phase-items">
+                                <div class="phase-item">
+                                    <h5>법률 개념 관계 정의</h5>
+                                    <p>법령↔판례↔절차 연관관계</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>계층구조 설정</h5>
+                                    <p>상위법↔하위법 계층구조</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>상속관계 정의</h5>
+                                    <p>일반원칙→특수규정</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>규칙 기반 추론 엔진</h5>
+                                    <p>if-then 추론 규칙</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="process-phase phase-2">
+                        <div class="phase-header">
+                            <div class="phase-number">2</div>
+                            <h4>구조화된 데이터 변환</h4>
+                        </div>
+                        <div class="phase-content">
+                            <div class="phase-items">
+                                <div class="phase-item">
+                                    <h5>텍스트 데이터 엔터티 추출</h5>
+                                    <p>NER + Legal Entity Recognition</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>관계 정보 매핑</h5>
+                                    <p>관계 패턴 매칭 + ML 분류</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>관계 검증</h5>
+                                    <p>전문가 검토 + 자동 검증</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>지식 그래프 DB 구축</h5>
+                                    <p>Neo4j/RDF 그래프 저장</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="process-phase phase-3">
+                        <div class="phase-header">
+                            <div class="phase-number">3</div>
+                            <h4>지능형 검색 및 추론</h4>
+                        </div>
+                        <div class="phase-content">
+                            <div class="phase-items">
+                                <div class="phase-item">
+                                    <h5>의미 기반 검색</h5>
+                                    <p>그래프 쿼리 + 벡터 검색</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>다단계 추론</h5>
+                                    <p>다중 홉 경로 탐색</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>맥락 인식 생성</h5>
+                                    <p>구조화된 맥락 구성</p>
+                                </div>
+                                <div class="phase-item">
+                                    <h5>정확한 답변 제공</h5>
+                                    <p>근거 기반 답변 생성</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-effect-comparison fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">📊 데이터 구조화 효과 비교</h3>
+                <div class="effect-comparison">
+                    <div class="effect-column before">
+                        <h4>기존 방식: 비구조화 데이터</h4>
+                        <div class="effect-flow">
+                            <div class="effect-step">원시 텍스트</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step">단순 청킹</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step">벡터 임베딩</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step">유사도 검색</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step problem">❌ 관계 정보 손실</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step problem">❌ 맥락 단절</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step problem">❌ 부정확한 답변</div>
+                        </div>
+                    </div>
+                    
+                    <div class="effect-column after">
+                        <h4>제안 방식: Knowledge Graph 구조화</h4>
+                        <div class="effect-flow">
+                            <div class="effect-step">원시 텍스트</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step">엔터티 추출</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step">관계 매핑</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step">그래프 구축</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step success">✅ 관계 정보 보존</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step success">✅ 다중 홉 추론</div>
+                            <div class="effect-arrow">↓</div>
+                            <div class="effect-step success">✅ 정확한 답변</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Solution Section Styles */
+        .solution {
+            background: linear-gradient(135deg, #f0fff4 0%, #e8f5e9 100%);
+            position: relative;
+        }
+
+        .solution-hero {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 4rem;
+        }
+
+        .solution-hero h3 {
+            color: var(--success-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .solution-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Value Grid */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.1);
+            border-left: 4px solid var(--success-color);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .value-card h4 {
+            color: var(--success-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .value-card p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Legal Knowledge Graph Structure */
+        .knowledge-graph-structure {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 4rem 0;
+        }
+
+        .legal-knowledge-graph {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .graph-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* 그래프 노드 스타일 */
+        .graph-node {
+            position: absolute;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            min-width: 160px;
+            border: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .graph-node:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .node-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .node-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .node-subtitle {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .node-description {
+            font-size: 0.75rem;
+            color: #666;
+            line-height: 1.3;
+            opacity: 0.8;
+        }
+
+        /* 중심 노드 - 사건 */
+        .center-case {
+            background: linear-gradient(135deg, #7c4dff 0%, #5e35b1 100%);
+            color: white;
+            border: 3px solid rgba(255,255,255,0.9);
+            transform: scale(1.1);
+        }
+
+        .center-case .node-title,
+        .center-case .node-subtitle,
+        .center-case .node-description {
+            color: white;
+        }
+
+        /* 각 노드별 파스텔 색상 테마 */
+        .legal-document {
+            background: linear-gradient(135deg, #b3d9ff 0%, #87ceeb 100%);
+            color: #2c3e50;
+        }
+
+        .legal-concept {
+            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+            color: #2c3e50;
+        }
+
+        .statute {
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            color: #2c3e50;
+        }
+
+        .legal-entity {
+            background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+            color: #2c3e50;
+        }
+
+        .regulation {
+            background: linear-gradient(135deg, #f8bbd9 0%, #f48fb1 100%);
+            color: #2c3e50;
+        }
+
+        .legal-principle {
+            background: linear-gradient(135deg, #b2dfdb 0%, #80cbc4 100%);
+            color: #2c3e50;
+        }
+
+        .citation {
+            background: linear-gradient(135deg, #dcedc8 0%, #c5e1a5 100%);
+            color: #2c3e50;
+        }
+
+        .case-relation {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff176 100%);
+            color: #2c3e50;
+        }
+
+        /* 검은색 말풍선 관계 라벨 */
+        .relation-bubble {
+            position: absolute;
+            background: #2c3e50;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+            z-index: 15;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .relation-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #2c3e50;
+        }
+
+        /* 범례 */
+        .graph-legend {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .graph-legend h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .legend-line {
+            width: 30px;
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        .legend-item span {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        /* Knowledge Graph Process */
+        .reasoning-path {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 4rem 0;
+        }
+
+        .kg-process-flow {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .kg-stage {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            min-height: 500px;
+            border: 2px solid #e8e8e8;
+        }
+
+        .kg-stage::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+        }
+
+        .kg-stage-1::before {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+        }
+
+        .kg-stage-2::before {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+
+        .kg-stage-3::before {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+        }
+
+        .kg-stage-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .kg-stage-header h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .kg-stage-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .kg-stage-1 .kg-stage-number {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+        }
+
+        .kg-stage-2 .kg-stage-number {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+
+        .kg-stage-3 .kg-stage-number {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+        }
+
+        .kg-process-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .kg-process-step {
+            background: #f8f9fb;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .kg-stage-1 .kg-process-step {
+            border-left: 4px solid #88d8a3;
+        }
+
+        .kg-stage-2 .kg-process-step {
+            border-left: 4px solid #74b9ff;
+        }
+
+        .kg-stage-3 .kg-process-step {
+            border-left: 4px solid #fd79a8;
+        }
+
+        .kg-process-step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .kg-step-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .kg-step-icon {
+            font-size: 1.2rem;
+        }
+
+        .kg-step-description {
+            font-size: 0.9rem;
+            color: #636e72;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px dashed #ddd;
+        }
+
+        .kg-connection-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            min-width: 60px;
+        }
+
+        .kg-connection-line {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #74b9ff, #fd79a8);
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .kg-connection-line::after {
+            content: '▶';
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fd79a8;
+            font-size: 1.2rem;
+        }
+
+        .kg-highlight-box {
+            background: linear-gradient(135deg, rgba(116, 185, 255, 0.1), rgba(253, 121, 168, 0.1));
+            border: 2px solid #74b9ff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .kg-highlight-text {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        /* Implementation Process */
+        .implementation-process {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 4rem 0;
+        }
+
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .process-phase {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .phase-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .phase-1 .phase-header {
+            background: var(--gradient-3);
+        }
+
+        .phase-2 .phase-header {
+            background: var(--gradient-1);
+        }
+
+        .phase-3 .phase-header {
+            background: var(--gradient-2);
+        }
+
+        .phase-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1rem;
+        }
+
+        .phase-content {
+            background: white;
+            padding: 2rem;
+        }
+
+        .phase-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .phase-item h5 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .phase-item p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Effect Comparison */
+        .data-effect-comparison {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 4rem 0;
+        }
+
+        .effect-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .effect-column h4 {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .effect-column.before h4 {
+            background: #fff5f5;
+            color: var(--accent-color);
+        }
+
+        .effect-column.after h4 {
+            background: #f0fff4;
+            color: var(--success-color);
+        }
+
+        .effect-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .effect-step {
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+        }
+
+        .effect-step.problem {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        .effect-step.success {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .effect-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #666;
+        }
+
+        @media (max-width: 968px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .graph-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .kg-process-flow {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .kg-stage {
+                min-height: 350px;
+            }
+
+            .kg-stage-header h4 {
+                font-size: 1.2rem;
+            }
+
+            .kg-step-title {
+                font-size: 0.9rem;
+            }
+
+            .kg-step-description {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+
+            .process-flow {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .effect-comparison {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .explore-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .connection-text {
+                writing-mode: initial;
+                text-orientation: initial;
+                         }
+         }
+     </style>
+
+    <!-- Overview Section -->
+    <section id="overview" class="overview">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>프로젝트 개요</h2>
+                <p>one-stop 법률구조에 필요한 국가법령정보센터, 대법원, 헌법재판소, 국회 등<br>
+                    다양한 공공 법률 정보를 하나로 통합하여 단계적 AI 법률지식서비스 개선 방안</p>
+            </div>
+
+            <div class="overview-content fade-in">
+                <div class="purpose-card">
+                    <h3>📌 목적 및 필요성</h3>
+                    <p>이용자가 자신의 사례에 적합한 법률구조서비스와 법률지식정보를 제공받을 수 있도록, AI 법률지식서비스 개선을 위한 방안을 모색</p>
+                    <ul>
+                        <li>한 곳에서 나의 법률문제를 해결할 수 있는 통합 플랫폼</li>
+                        <li>국민의 편의성 증진 및 참여기관의 업무능률 향상</li>
+                        <li>생성형 AI 기반 맞춤형 법률 지원 서비스 구현</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-timeline fade-in">
+                <h3>🚀 단계별 추진 전략</h3>
+                <div class="phase-flow">
+                    <div class="phase-item">
+                        <div class="phase-number">1</div>
+                        <div class="phase-card">
+                            <div class="phase-header short-term-min">
+                                <span class="phase-label">단기-최소</span>
+                                <span class="phase-period">2025년 6-8월</span>
+                            </div>
+                            <h4>법률 데이터 체계화</h4>
+                            <p>체계적 데이터 수집 및 구조화 기반 구축</p>
+                            <ul>
+                                <li>법령 정보 수집 자동화</li>
+                                <li>데이터 구조화 및 표준화</li>
+                                <li>Q&A 학습데이터셋 설계</li>
+                            </ul>
+                        </div>
+                        <div class="phase-arrow">→</div>
+                    </div>
+
+                    <div class="phase-item">
+                        <div class="phase-number">2</div>
+                        <div class="phase-card">
+                            <div class="phase-header short-term-opt">
+                                <span class="phase-label">단기-최적</span>
+                                <span class="phase-period">2025년 9-11월</span>
+                            </div>
+                            <h4>지능형 시스템 구축</h4>
+                            <p>Knowledge Graph 기반 RAG 고도화 및 Agent 개발</p>
+                            <ul>
+                                <li>Knowledge Graph 기반 지식 구조화</li>
+                                <li>RAG 시스템 고도화</li>
+                                <li>능동형 대화 Agent 개발</li>
+                            </ul>
+                        </div>
+                        <div class="phase-arrow">→</div>
+                    </div>
+
+                    <div class="phase-item">
+                        <div class="phase-number">3</div>
+                        <div class="phase-card">
+                            <div class="phase-header long-term">
+                                <span class="phase-label">중장기-최적</span>
+                                <span class="phase-period">2026년~</span>
+                            </div>
+                            <h4>One-Stop 법률구조 완성</h4>
+                            <p>차세대 통합 법률 지원 서비스</p>
+                            <ul>
+                                <li>전 분야 서비스 확대</li>
+                                <li>다채널 통합 플랫폼</li>
+                                <li>지속적 학습 체계</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Overview Section Styles */
+        .overview {
+            position: relative;
+            z-index: 10;
+            background: white;
+        }
+
+        .overview-content {
+            margin-bottom: 4rem;
+        }
+
+        .purpose-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .purpose-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .purpose-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .purpose-card li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #666;
+        }
+
+        .purpose-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .phase-timeline {
+            margin-top: 4rem;
+        }
+
+        .phase-timeline h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            font-size: 1.8rem;
+        }
+
+        .phase-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .phase-flow::before {
+            content: '';
+            position: absolute;
+            top: 80px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #3498db, #9b59b6, #e74c3c);
+            z-index: 0;
+        }
+
+        .phase-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phase-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 3px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .phase-card h4 {
+            padding: 1rem 1.5rem 0.5rem;
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .phase-card p {
+            padding: 0 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .phase-card ul {
+            padding: 0 1.5rem 1.5rem;
+            list-style: none;
+            margin: 0;
+        }
+
+        .phase-card li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .phase-card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .phase-arrow {
+            position: absolute;
+            right: -25px;
+            top: 80px;
+            font-size: 2rem;
+            color: #ddd;
+            z-index: 2;
+        }
+
+        .phase-item:last-child .phase-arrow {
+            display: none;
+        }
+
+        .phase-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .short-term-min {
+            background: #3498db;
+        }
+
+        .short-term-opt {
+            background: #9b59b6;
+        }
+
+        .long-term {
+            background: #e74c3c;
+        }
+
+        .phase-label {
+            font-weight: 600;
+        }
+
+        .phase-period {
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 968px) {
+            .phase-flow {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .phase-flow::before {
+                top: 30px;
+                bottom: 30px;
+                left: 30px;
+                right: auto;
+                width: 2px;
+                height: auto;
+                background: linear-gradient(to bottom, #3498db, #9b59b6, #e74c3c);
+            }
+
+            .phase-arrow {
+                top: auto;
+                bottom: -40px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%) rotate(90deg);
+            }
+
+            .phase-card {
+                max-width: 100%;
+            }
+                 }
+
+        /* 새로운 가로 프로세스 플로우 스타일 */
+        .kg-horizontal-flow {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .kg-horizontal-flow .kg-stage {
+            flex: 1;
+            min-height: 450px;
+        }
+
+        .kg-horizontal-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 60px;
+        }
+
+        .arrow-line {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #74b9ff, #fd79a8);
+            border-radius: 3px;
+        }
+
+        .arrow-head {
+            font-size: 1.5rem;
+            color: #fd79a8;
+            margin-left: 5px;
+        }
+
+        .kg-vertical-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .arrow-line-vertical {
+            width: 3px;
+            height: 50px;
+            background: linear-gradient(180deg, #fd79a8, #e17055);
+            border-radius: 3px;
+        }
+
+        .arrow-head-vertical {
+            font-size: 1.5rem;
+            color: #e17055;
+            margin-top: 5px;
+        }
+
+        .kg-final-result {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .final-result-header h4 {
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+        }
+
+        .final-result-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+        }
+
+        .final-result-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-highlight {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .result-highlight:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 968px) {
+            .kg-horizontal-flow {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .kg-horizontal-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .arrow-line {
+                width: 3px;
+                height: 50px;
+                background: linear-gradient(180deg, #74b9ff, #fd79a8);
+            }
+
+            .arrow-head {
+                transform: rotate(90deg);
+                margin-left: 0;
+                margin-top: 5px;
+            }
+
+            .final-result-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+     </style>
+
+    <!-- Example Section - 3-column Chat Comparison -->
+    <section id="example" class="example">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>AI 대화 방식 3시스템 비교</h2>
+                <p>동일한 질문에 대한 각 시스템의 응답 차이를 확인해보세요</p>
+            </div>
+
+            <div class="three-column-comparison fade-in">
+                <!-- 기존 법률똑똑이 -->
+                <div class="chat-wrapper">
+                    <div class="chat-container current-system">
+                        <div class="chat-header current-header">
+                            <h4>법률똑똑이</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>안녕하세요</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p>안녕하세요! 법률은 질의하신 사안과 정확하게 일치하는 사례가 아닙니다.</p>
+                                    <p style="margin-top: 0.5rem;">이는 참고용으로만 사용하시고 개별적인 사안과 관련하여 구체적인 상담이 필요한 경우에는 반드시 공단을 방문하거나 전화상담(☎국번없이 132)을 통해 상담하시기 바랍니다.</p>
+
+                                    <div style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 10px;">
+                                        <p><strong>원하시는 법률상담은 아래 메뉴를 선택해주세요:</strong></p>
+                                        <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                                            <li style="padding: 0.5rem 0;">📋 주택·상가임대차</li>
+                                            <li style="padding: 0.5rem 0;">⚖️ 주택임대차</li>
+                                            <li style="padding: 0.5rem 0;">💰 임대차 기간 및 종료에 관한 분쟁</li>
+                                            <li style="padding: 0.5rem 0;">📄 1.임대차의 존속기간</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>1. 계약으로 존속기간을 정하는 경우</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">법률똑똑이</div>
+                                    <p>주택임대차보호법 제4조 제1항에 따라, 임대차기간을 2년 미만으로 약정한 경우에도 임차인은 2년의 최소 주거안정기간을 보호받을 수 있습니다.</p>
+                                    <p style="margin-top: 0.5rem;">그러나, 임차인이 2년 미만의 약정기간이 유효함을 주장하면 해당 약정이 유효하며, 이에 따라 보증금 반환을 청구할 수 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="system-issues">
+                            <h5>❌ 문제점</h5>
+                            <ul>
+                                <li>복잡한 메뉴 선택 방식</li>
+                                <li>획일적 답변 패턴</li>
+                                <li>맥락 파악 불가</li>
+                                <li>긴 면책 조항</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help law -->
+                <div class="chat-wrapper">
+                    <div class="chat-container helplaw-system">
+                        <div class="chat-header helplaw-header">
+                            <h4>Help law</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임대차 계약에 대해 알고 싶습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">Help law</div>
+                                    <p>임대차계약에 대한 주요 내용은 다음과 같습니다.</p>
+
+                                    <div style="margin-top: 1rem; padding: 1rem; background: #e8f0fe; border-radius: 10px;">
+                                        <p><strong>임대차분쟁조정:</strong> 주택 또는 상가의 임대차와 관련된 분쟁을 해결하기 위해 임차인과 임대인 모두 신청할 수 있는 조정 절차가 있습니다.</p>
+                                        <p style="margin-top: 1rem;"><strong>조정신청 방법:</strong> 웹사이트, 방문, 우편 또는 팩스 중 선택할 수 있으며, 임차인과 임대인 모두 신청 가능합니다.</p>
+                                        <p style="margin-top: 1rem;"><strong>수수료 및 면제:</strong> 조정 신청 시 조정 목적에 따라 수수료가 부과되며, 특정 조건을 충족하면 무료로 진행할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>수수료 및 면제에서 특정 조건을 충족하면 무료로 진행된다고 하는데, 특정 조건에 대해 설명해주세요</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">Help law</div>
+                                    <p>수수료 면제에 대한 조건은 다음과 같습니다:</p>
+                                    <ul style="margin-top: 1rem; padding-left: 1rem;">
+                                        <li>우선변제 임차인: 「주택임대차보호법」 제8조에 따라 우선변제를 받을 수 있는 임차인</li>
+                                        <li>국민기초생활 보장법 수급자</li>
+                                        <li>독립유공자 및 그 유족</li>
+                                        <li>국가유공자 및 그 유족</li>
+                                        <li>고엽제후유의증 환자</li>
+                                        <li>참전유공자</li>
+                                        <li>5·18민주유공자 및 그 유족</li>
+                                        <li>특수임무수행자 및 그 유족</li>
+                                        <li>의사상자 및 의사자유족</li>
+                                        <li>한부모가족지원법 지원대상자</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="system-issues">
+                            <h5>❌ 문제점</h5>
+                            <ul>
+                                <li>표면적 정보만 제공</li>
+                                <li>상황별 맞춤 불가</li>
+                                <li>단발성 응답</li>
+                                <li>이전 대화 연관 불가</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 차세대 시스템 -->
+                <div class="chat-wrapper">
+                    <div class="chat-container improved-system">
+                        <div class="chat-header improved-header">
+                            <h4>차세대 One-Stop 법률구조서비스</h4>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임대차계약에 대해 알고 싶습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률구조서비스</div>
+                                    <p>네, 임대차계약에 대해 도와드리겠습니다.<br>
+                                        혹시 임대인(집주인)이신가요, 아니면 임차인(세입자)이신가요?</p>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>임차인입니다</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률구조서비스</div>
+                                    <p>알겠습니다. 임차인으로서 어떤 점이 어려우신가요?</p>
+                                </div>
+                            </div>
+
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <p>지금 살고 있는 집을 1년 전에 빌렸는데, 집주인이 계약기간이 끝났다며 집을 비워주거나 아니면 보증금을 올려달라고 요구합니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="message ai">
+                                <div class="message-bubble">
+                                    <div class="message-label">One-Stop 법률구조서비스</div>
+                                    <p><strong>네, 법규정을 통해 답변드리겠습니다.</strong></p>
+
+                                    <div class="info-box">
+                                        <p><strong>📋 주택임대차보호법 제4조</strong></p>
+                                        <p style="margin-top: 0.5rem; font-style: italic;">"기간을 정하지 아니하거나 2년 미만으로 정한 임대차는 그 기간을 2년으로 본다."</p>
+                                    </div>
+
+                                    <div class="action-box">
+                                        <p><strong>💡 결론 및 대응방안</strong></p>
+                                        <p style="margin-top: 0.5rem;">임차인은 임대인에게 <strong>임대차계약기간이 아직 1년 남아있음</strong>을
+                                            이유로 임대인의 요구에 따르지 않을 수 있습니다.</p>
+                                        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                            <strong>근거:</strong> 주택임대차보호법 제4조제1항, 대법원 2001. 9. 25. 선고 2000다24078 판결<br>
+                                            <strong>참조:</strong> 법률구조공단 플랫폼 > 법률상담사례 > 1년약정의 주택임대차.....(생략)
+                                        </p>
+                                    </div>
+                                    <div class="contact-box">
+                                        <p><strong>📞 추가 상담이 필요하신가요?</strong><br>
+                                            법률구조공단 ☎132 (무료)<br>
+                                            www.klac.or.kr
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="system-improvements">
+                            <h5>✅ 개선사항</h5>
+                            <ul>
+                                <li>개인화된 상담</li>
+                                <li>근거 기반 답변</li>
+                                <li>종합적 해결책</li>
+                                <li>능동적 질문</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <style>
+        /* Example Section Styles */
+        .example {
+            background: var(--light-bg);
+        }
+
+        .three-column-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chat-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .current-header {
+            background: #e74c3c;
+        }
+
+        .helplaw-header {
+            background: #f39c12;
+        }
+
+        .improved-header {
+            background: #27ae60;
+        }
+
+        .chat-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chat-messages {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            background: #f1f1f1;
+            padding: 1rem;
+            border-radius: 15px;
+            max-width: 85%;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .message.user .message-bubble {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .message.user .message-label {
+            display: none;
+        }
+
+        .info-box {
+            background: #d4edda;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border-left: 4px solid #28a745;
+            font-size: 0.8rem;
+        }
+
+        .action-box {
+            background: #e8f0fe;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border-left: 4px solid #2196F3;
+            font-size: 0.8rem;
+        }
+
+        .system-issues,
+        .system-improvements {
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .system-issues {
+            background: #fff5f5;
+            border-top: 3px solid #e74c3c;
+        }
+
+        .system-improvements {
+            background: #f0fff4;
+            border-top: 3px solid #27ae60;
+        }
+
+        .system-issues h5,
+        .system-improvements h5 {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .system-issues ul,
+        .system-improvements ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .system-issues li,
+        .system-improvements li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.8rem;
+        }
+
+        .system-issues li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .system-improvements li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Comparison Summary */
+        .comparison-summary {
+            margin-top: 4rem;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-card h4 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .flow-improvement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .flow-item {
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .flow-item.current {
+            background: #fff5f5;
+            border: 2px solid #e74c3c;
+        }
+
+        .flow-item.improved {
+            background: #f0fff4;
+            border: 2px solid #27ae60;
+        }
+
+        .flow-item h5 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .flow-item.current h5 {
+            color: #e74c3c;
+        }
+
+        .flow-item.improved h5 {
+            color: #27ae60;
+        }
+
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-steps span {
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 2px solid #ddd;
+        }
+
+        .flow-item.current .flow-steps span:last-child {
+            background: #ffebee;
+            border-color: #e74c3c;
+            color: #c62828;
+        }
+
+        .flow-item.improved .flow-steps span:last-child {
+            background: #e8f5e9;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        @media (max-width: 1200px) {
+            .three-column-comparison {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .chat-container {
+                height: auto;
+                min-height: 500px;
+            }
+
+            .flow-improvement-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-messages {
+                padding: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .message-bubble {
+                padding: 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .chat-header h4 {
+                font-size: 1rem;
+            }
+
+            .system-issues,
+            .system-improvements {
+                padding: 0.8rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .flow-steps {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+                 }
+     </style>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>AI 서비스 구조</h2>
+                <p>능동형 대화 Agent 모델 기반의 차세대 법률 지원 서비스 아키텍처</p>
+            </div>
+
+            <div class="arch-diagram fade-in">
+                <h3 style="text-align: center; margin-bottom: 3rem;">🏗️ 시스템 아키텍처</h3>
+                <div class="simplified-architecture">
+                    <div class="arch-layer user-layer">
+                        <h4>🌐 사용자 접점 계층</h4>
+                        <div class="arch-components">
+                            <div class="arch-component">웹 플랫폼</div>
+                            <div class="arch-component">모바일 앱</div>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer agent-layer">
+                        <h4>🤖 능동형 대화 Agent 계층</h4>
+                        <div class="arch-components">
+                            <div class="arch-component">의도 분석</div>
+                            <div class="arch-component">정보 수집</div>
+                            <div class="arch-component">추론 엔진</div>
+                            <div class="arch-component">답변 생성</div>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer core-layer">
+                        <h4>⚙️ 핵심 AI 엔진</h4>
+                        <div class="arch-components">
+                            <div class="arch-component">한국어 특화 LLM</div>
+                            <div class="arch-component">Knowledge Graph RAG</div>
+                            <div class="arch-component">Vector DB</div>
+                        </div>
+                    </div>
+                    <div class="arch-arrow">↓</div>
+                    <div class="arch-layer data-layer">
+                        <h4>📊 법률 지식 네트워크</h4>
+                        <div class="arch-components">
+                            <div class="arch-component">법령 온톨로지</div>
+                            <div class="arch-component">판례 관계망</div>
+                            <div class="arch-component">지식 그래프</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>단계별 구현 일정</h2>
+                <p>2025년 6월부터 2026년까지 체계적인 단계별 구현을 통한 서비스 고도화</p>
+            </div>
+
+            <div class="timeline-container fade-in">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">1단계: 단기-최소</div>
+                        <div class="timeline-date">2025년 6-8월 (3개월)</div>
+                        <h4>법률 데이터 체계화 및 기반 구축</h4>
+                        <ul>
+                            <li>법령 정보 수집 및 구조화 체계 구축</li>
+                            <li>데이터 표준화 및 품질 관리 프로세스</li>
+                            <li>Q&A 기반 학습데이터셋 설계</li>
+                            <li>민사·형사·노동 분야 우선 적용</li>
+                            <li>기초 데이터 검증 및 정제</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">2단계: 단기-최적</div>
+                        <div class="timeline-date">2025년 9-11월 (3개월)</div>
+                        <h4>지능형 시스템 및 Knowledge Graph 고도화</h4>
+                        <ul>
+                            <li>Knowledge Graph 기반 법률 지식 구조화</li>
+                            <li>RAG 시스템 고도화 및 최적화</li>
+                            <li>능동형 대화 Agent 모델 개발</li>
+                            <li>교과서, 주석서, 하급심 판례 통합</li>
+                            <li>시범 서비스 운영 및 피드백 수집</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-phase">3단계: 중장기-최적</div>
+                        <div class="timeline-date">2026년~ (후속사업)</div>
+                        <h4>One-Stop 법률구조 완성</h4>
+                        <ul>
+                            <li>문제 해결 중심 대화형 AI Assistant</li>
+                            <li>상담·구조·조정·피해구제 통합</li>
+                            <li>전 법률 분야로 서비스 확대</li>
+                            <li>다채널 통합 플랫폼 구축</li>
+                            <li>지속적 학습 및 자동 업데이트</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>기대 효과</h2>
+                <p>AI 기술을 통한 법률 서비스의 혁신적 개선</p>
+            </div>
+
+            <div class="solution-features fade-in">
+                <div class="feature">
+                    <div class="feature-icon">👥</div>
+                    <h3>대국민 서비스 향상</h3>
+                    <ul>
+                        <li>법률 정보 접근성 획기적 개선</li>
+                        <li>개인 맞춤형 법률 지원</li>
+                        <li>24시간 전문적 상담 가능</li>
+                        <li>Knowledge Graph 기반 정확한 정보 제공</li>
+                    </ul>
+                    <div class="metric-highlight">
+                        <div class="metric-value">95%</div>
+                        <div class="metric-label">사용자 만족도 향상</div>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>업무 효율성 증대</h3>
+                    <ul>
+                        <li>상담원 업무 최적화</li>
+                        <li>표준화된 정보 제공</li>
+                        <li>신속한 초기 대응</li>
+                        <li>구조화된 지식 관리</li>
+                    </ul>
+                    <div class="metric-highlight">
+                        <div class="metric-value">70%</div>
+                        <div class="metric-label">업무 처리 시간 단축</div>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>법률 서비스 혁신</h3>
+                    <ul>
+                        <li>AI 기반 공공 서비스 표준</li>
+                        <li>예방적 법률 지원</li>
+                        <li>지속적 품질 향상</li>
+                        <li>환각 문제 해결</li>
+                    </ul>
+                    <div class="metric-highlight">
+                        <div class="metric-value">80%</div>
+                        <div class="metric-label">환각 발생률 감소</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>프로젝트 문의</h2>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="imgs/ali_logo.png" alt="자치법연구원 로고">
+                    <h4>자치법연구원</h4>
+                    <p><strong>강지선 연구위원</strong><br>
+                        📧 thewarmsoul@daum.net<br>
+                        📞 010-9473-7685</p>
+                </div>
+                <div class="contact-item">
+                    <img src="imgs/poi_logo.png" alt="포이 로고">
+                    <h4>주식회사 포이</h4>
+                    <p><strong>김명석 과장</strong><br>
+                        📧 paul.kim@poi.so<br>
+                        📞 010-2819-1202</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Architecture Section */
+        .architecture {
+            background: white;
+        }
+
+        .simplified-architecture {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .arch-layer {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .arch-layer h4 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .arch-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .arch-component {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .arch-component:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .arch-arrow {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        /* Timeline Section */
+        .timeline {
+            background: #f5f7fa;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 3rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px white, 0 0 0 6px var(--primary-color);
+        }
+
+        .timeline-phase {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+        }
+
+        .timeline-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Benefits Section */
+        .benefits {
+            background: white;
+        }
+
+        .benefits .solution-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .benefits .feature {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefits .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .benefits .feature:nth-child(2)::before {
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .benefits .feature:nth-child(3)::before {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .benefits .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefits .feature-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            color: white;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .benefits .feature:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+
+        .benefits .feature:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .benefits .feature h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .benefits .feature ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        .benefits .feature li {
+            padding: 0.75rem 0;
+            color: #666;
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .benefits .feature li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .benefits .metric-highlight {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .benefits .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefits .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .contact h2 {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-item img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.9;
+        }
+
+        @media (max-width: 968px) {
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                padding: 1.5rem;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .benefits .solution-features {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .arch-components {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .arch-components {
+                grid-template-columns: 1fr;
+            }
+
+            #architecture {
+                display: none;
+            }
+        }
+    </style>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileMenuToggle && mobileNav) {
+            mobileMenuToggle.addEventListener('click', function () {
+                mobileNav.classList.toggle('active');
+                if (mobileNav.classList.contains('active')) {
+                    mobileMenuToggle.textContent = '✕';
+                } else {
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!mobileNav.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+       </body>
+       </html> 
