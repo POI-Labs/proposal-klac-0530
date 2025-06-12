@@ -130,6 +130,395 @@
             }
         }
 
+        /* Current Problems Section Styles */
+        .current-problems {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            position: relative;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .problem-header {
+            background: linear-gradient(135deg, #ffebee 0%, #f8d7da 100%);
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+        }
+
+        .problem-header h4 {
+            color: var(--accent-color);
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .problem-summary {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .problem-content {
+            padding: 1.5rem;
+        }
+
+        .problem-item {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #fafafa;
+            border-radius: 8px;
+            align-items: flex-start;
+        }
+
+        .problem-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .problem-label {
+            color: var(--accent-color);
+            font-weight: 600;
+            min-width: 50px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .problem-desc {
+            color: #666;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            margin-top: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table-style {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table-style th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .comparison-table-style th:first-child {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            width: 20%;
+        }
+
+        .comparison-table-style th.current-system {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            width: 40%;
+        }
+
+        .comparison-table-style th.proposed-system {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            width: 40%;
+        }
+
+        .comparison-table-style td {
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: middle;
+        }
+
+        .comparison-table-style td:first-child {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .comparison-table-style td.current-system {
+            background: #fff5f5;
+            color: #c0392b;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .comparison-table-style td.proposed-system {
+            background: #f0fff4;
+            color: #229954;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .comparison-table-style tr:last-child td {
+            border-bottom: none;
+        }
+
+        @media (max-width: 968px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table-style {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table-style th,
+            .comparison-table-style td {
+                padding: 1rem 0.5rem;
+            }
+
+            .table-wrapper {
+                margin: 0 -1rem;
+            }
+        }
+
+        /* Example Section Styles */
+        .example {
+            background: var(--light-bg);
+        }
+
+        .three-column-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .chat-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .chat-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .current-header {
+            background: #e74c3c;
+        }
+
+        .helplaw-header {
+            background: #f39c12;
+        }
+
+        .improved-header {
+            background: #27ae60;
+        }
+
+        .chat-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chat-messages {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            background: #f1f1f1;
+            padding: 1rem;
+            border-radius: 15px;
+            max-width: 85%;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .message.user .message-bubble {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .message-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .message.user .message-label {
+            display: none;
+        }
+
+        .info-box {
+            background: #d4edda;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border-left: 4px solid #28a745;
+            font-size: 0.8rem;
+        }
+
+        .action-box {
+            background: #e8f0fe;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border-left: 4px solid #2196F3;
+            font-size: 0.8rem;
+        }
+
+        .contact-box {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border-left: 4px solid #ffc107;
+            font-size: 0.8rem;
+        }
+
+        .system-issues,
+        .system-improvements {
+            padding: 1rem 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .system-issues {
+            background: #fff5f5;
+            border-top: 3px solid #e74c3c;
+        }
+
+        .system-improvements {
+            background: #f0fff4;
+            border-top: 3px solid #27ae60;
+        }
+
+        .system-issues h5,
+        .system-improvements h5 {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .system-issues ul,
+        .system-improvements ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .system-issues li,
+        .system-improvements li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.8rem;
+        }
+
+        .system-issues li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .system-improvements li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        @media (max-width: 1200px) {
+            .three-column-comparison {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .chat-container {
+                height: auto;
+                min-height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .chat-messages {
+                padding: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .message-bubble {
+                padding: 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .chat-header h4 {
+                font-size: 1rem;
+            }
+
+            .system-issues,
+            .system-improvements {
+                padding: 0.8rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -266,6 +655,10 @@
         }
 
         /* 색상별 배경 */
+        .current-status {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+        }
+
         .data-collection {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
         }
@@ -286,6 +679,249 @@
             background: var(--dark-bg);
             color: var(--text-light);
         }
+
+        /* 현재 시스템 현황 섹션 스타일 */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .achievement-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .issue-card {
+            background: white;
+            padding: 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-left: 5px solid var(--warning-color);
+        }
+
+        .issue-header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .issue-number {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .issue-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .issue-summary {
+            padding: 1rem 1.5rem;
+            background: #fff3cd;
+            font-weight: 500;
+            color: #856404;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .issue-comparison {
+            padding: 1.5rem;
+        }
+
+        .comparison-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .comparison-item.success {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+        }
+
+        .comparison-item.problem {
+            background: #f8d7da;
+            border-left: 3px solid #dc3545;
+        }
+
+        .comparison-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .status-icon {
+            font-size: 1.1rem;
+        }
+
+        .comparison-item span:nth-child(2) {
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .comparison-item small {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .issue-points {
+            padding: 1.5rem;
+        }
+
+        .point-item {
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid var(--warning-color);
+            font-size: 0.9rem;
+        }
+
+        .point-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .structure-problems {
+            padding: 1.5rem;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #e74c3c;
+            font-size: 0.9rem;
+        }
+
+        .problem-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .problem-icon {
+            font-size: 1.1rem;
+        }
+
+        .causes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .cause-card {
+            background: white;
+            padding: 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .cause-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .cause-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .cause-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .cause-points {
+            padding: 1.5rem;
+        }
+
+        .cause-point {
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .cause-point:last-child {
+            margin-bottom: 0;
+        }
+
+        .urgent-solution {
+            margin-top: 3rem;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #ff7675 0%, #e17055 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(255, 118, 117, 0.3);
+        }
+
+        .solution-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .solution-box p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -295,7 +931,9 @@
         <div class="nav-container">
             <div class="nav-logo">법률구조서비스 플랫폼 개선 제안</div>
             <ul class="nav-links">
+                <li><a href="#current-status">운영 현황</a></li>
                 <li><a href="#data-collection">데이터 확보</a></li>
+                <li><a href="#current-problems">시스템 한계</a></li>
                 <li><a href="#data-structuring">데이터 구조화</a></li>
                 <li><a href="#collaboration">협력 시너지</a></li>
                 <li><a href="#company-intro">포이 소개</a></li>
@@ -320,7 +958,160 @@
                     <span>주식회사 포이</span>
                 </div>
             </div>
-            <a href="#data-collection" class="cta-button">제안서 살펴보기</a>
+            <a href="#current-status" class="cta-button">제안서 살펴보기</a>
+        </div>
+    </section>
+
+    <!-- 현재 시스템 운영 현황 및 주요 이슈 -->
+    <section id="current-status" class="current-status">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>🔍 현재 시스템 운영 현황 및 주요 이슈</h2>
+                <p>법률구조서비스 플랫폼의 현황 분석을 통한 개선 방향 도출</p>
+            </div>
+
+            <div class="current-achievements fade-in">
+                <h3 style="text-align: center; color: var(--success-color); margin-bottom: 3rem;">🎯 현재 시스템 운영 성과</h3>
+                
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">💬</div>
+                        <h4>Q&A 기반 답변</h4>
+                        <p>공단 제공 Q&A 데이터셋 기반으로 <strong>유사 질의에 대한 답변품질 어느 정도 확보</strong></p>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">📚</div>
+                        <h4>기본 법률 정보</h4>
+                        <p>국가법령정보센터 데이터 활용한 기본적인 법령 검색 서비스 제공</p>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">🌐</div>
+                        <h4>접근성 개선</h4>
+                        <p>대국민 법률 정보 접근 장벽 완화 효과</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="key-issues fade-in">
+                <h3 style="text-align: center; color: var(--warning-color); margin-bottom: 3rem;">⚠️ 핵심 이슈사항 분석</h3>
+                
+                <div class="issues-grid">
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-number">1</div>
+                            <h4>생성형 AI 답변 정확도 문제</h4>
+                        </div>
+                        <div class="issue-summary">
+                            적정한 답변 제시 한계 발생
+                        </div>
+                        <div class="issue-comparison">
+                            <div class="comparison-item success">
+                                <span class="status-icon">✅</span>
+                                <span>Q&A 기반 유사질의</span>
+                                <small>답변품질 확보</small>
+                            </div>
+                            <div class="comparison-item problem">
+                                <span class="status-icon">❌</span>
+                                <span>법령·판례 질의</span>
+                                <small>정확한 답변 생성률 저조</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-number">2</div>
+                            <h4>답변 내용의 구체성 부족</h4>
+                        </div>
+                        <div class="issue-summary">
+                            개요 수준에 그치는 답변 한계
+                        </div>
+                        <div class="issue-points">
+                            <div class="point-item">
+                                <strong>현재:</strong> 기본 개요 수준
+                            </div>
+                            <div class="point-item">
+                                <strong>요구:</strong> 실무적 구체 정보
+                            </div>
+                            <div class="point-item">
+                                <strong>한계:</strong> 상세 답변 제공 어려움
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="issue-card">
+                        <div class="issue-header">
+                            <div class="issue-number">3</div>
+                            <h4>데이터 구조적 한계</h4>
+                        </div>
+                        <div class="issue-summary">
+                            평면적 데이터 구조의 한계
+                        </div>
+                        <div class="structure-problems">
+                            <div class="problem-item">
+                                <span class="problem-icon">🔗</span>
+                                <span>연관관계 표현 불가</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-icon">📋</span>
+                                <span>맥락적 연결 정보 부재</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-icon">🧠</span>
+                                <span>논리적 추론 정보 부족</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="root-causes fade-in">
+                <h3 style="text-align: center; color: var(--accent-color); margin-bottom: 3rem;">🔍 일차적 원인 분석</h3>
+                
+                <div class="causes-grid">
+                    <div class="cause-card">
+                        <div class="cause-header">
+                            <div class="cause-icon">🧩</div>
+                            <h4>법률데이터 특성상 한계</h4>
+                        </div>
+                        <div class="cause-points">
+                            <div class="cause-point">질의 의도 파악 어려움</div>
+                            <div class="cause-point">전문적 데이터 매칭 복잡성</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cause-card">
+                        <div class="cause-header">
+                            <div class="cause-icon">📊</div>
+                            <h4>학습데이터 부족</h4>
+                        </div>
+                        <div class="cause-points">
+                            <div class="cause-point">다양한 출처 데이터 부재</div>
+                            <div class="cause-point">풍부한 학습 소스 필요</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cause-card">
+                        <div class="cause-header">
+                            <div class="cause-icon">🔗</div>
+                            <h4>데이터 구조화 부족</h4>
+                        </div>
+                        <div class="cause-points">
+                            <div class="cause-point">단순 텍스트 기반 저장</div>
+                            <div class="cause-point">체계적 연결망 미흡</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="urgent-solution fade-in">
+                <div class="solution-box">
+                    <h3>🚨 시급한 해결 과제</h3>
+                    <p>현재 한계를 극복하고 사용자가 원하는 <strong>정확하고 구체적인 법률 정보</strong>를 제공하기 위해서는 </br><strong>추가적인 데이터 확보와 구조화 작업이 반드시 필요</strong>한 상황입니다.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -407,6 +1198,138 @@
                             <li>최신성 확보: 지속적인 데이터 업데이트를 통한 현행 법률 정보 반영</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 기존 RAG 시스템의 한계 -->
+    <section id="current-problems" class="current-problems">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>⚠️ 기존 RAG 시스템의 근본적 한계</h2>
+                <p>단순 텍스트 유사도 기반 검색으로는 법률 분야의 복잡한 추론과<br>
+                    정확한 정보 제공이 한계에 도달</p>
+            </div>
+
+            <div class="problem-analysis fade-in">
+                <h3 style="text-align: center; color: var(--accent-color); margin-bottom: 3rem;">🚨 핵심 문제점 3가지</h3>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-header">
+                            <div class="problem-icon">🎯</div>
+                            <h4>의미적 연관성 부족</h4>
+                        </div>
+                        <div class="problem-summary">키워드 매칭 중심의 단순 검색</div>
+                        <div class="problem-content">
+                            <div class="problem-item">
+                                <span class="problem-label">현상:</span>
+                                <span class="problem-desc">키워드 매칭 중심의 단순 검색</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-label">한계:</span>
+                                <span class="problem-desc">법령-판례-절차 간의 논리적 연관관계 파악 불가</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-label">결과:</span>
+                                <span class="problem-desc">관련 없는 정보 제공, 맥락 무시</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-header">
+                            <div class="problem-icon">🗂️</div>
+                            <h4>구조화되지 않은 정보 처리</h4>
+                        </div>
+                        <div class="problem-summary">비정형 텍스트 덩어리로만 학습</div>
+                        <div class="problem-content">
+                            <div class="problem-item">
+                                <span class="problem-label">현상:</span>
+                                <span class="problem-desc">비정형 텍스트 덩어리로만 학습</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-label">한계:</span>
+                                <span class="problem-desc">법률 개념 간의 계층구조와 상호관계 무시</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-label">결과:</span>
+                                <span class="problem-desc">추상적이고 일반적인 답변만 가능</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <div class="problem-header">
+                            <div class="problem-icon">⚠️</div>
+                            <h4>환각(잘못된 답변) 문제 심각</h4>
+                        </div>
+                        <div class="problem-summary">법률 AI 도구 환각 33% 이상 발생</div>
+                        <div class="problem-content">
+                            <div class="problem-item">
+                                <span class="problem-label">현상:</span>
+                                <span class="problem-desc">법률 AI 도구 환각 33% 이상 발생</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-label">한계:</span>
+                                <span class="problem-desc">아무리 많은 데이터를 투입해도 근본적 해결 불가</span>
+                            </div>
+                            <div class="problem-item">
+                                <span class="problem-label">결과:</span>
+                                <span class="problem-desc">잘못된 법률 정보 제공으로 인한 심각한 결과 초래</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-table fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">🔄 기존 방식 vs 새로운 방식 비교</h3>
+                <div class="table-wrapper">
+                    <table class="comparison-table-style">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th class="current-system">기존 RAG 시스템</th>
+                                <th class="proposed-system">Knowledge Graph RAG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>검색 방식</strong></td>
+                                <td class="current-system">단어만 찾는 단순 검색</td>
+                                <td class="proposed-system">의미를 이해하는 지능적 검색</td>
+                            </tr>
+                            <tr>
+                                <td><strong>정보 연결</strong></td>
+                                <td class="current-system">문서 하나씩만 검색</td>
+                                <td class="proposed-system">관련 법률들을 연결해서 검색</td>
+                            </tr>
+                            <tr>
+                                <td><strong>정확도</strong></td>
+                                <td class="current-system">잘못된 답변 자주 발생</td>
+                                <td class="proposed-system">구조화로 정확도 대폭 향상</td>
+                            </tr>
+                            <tr>
+                                <td><strong>확장성</strong></td>
+                                <td class="current-system">데이터 늘려도 조금씩만 개선</td>
+                                <td class="proposed-system">데이터 늘릴수록 훨씬 좋아짐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>법률 추론</strong></td>
+                                <td class="current-system">논리적 설명 불가능</td>
+                                <td class="proposed-system">근거와 함께 논리적 설명 제공</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="urgent-solution fade-in">
+                <div class="solution-box">
+                    <h3>💡 제안하는 내용</h3>
+                    <p>이러한 근본적 한계를 극복하기 위해서는 <strong>단순한 데이터 추가가 아닌 구조화된 접근</strong>이 필요합니다.<br>
+                    <strong>Knowledge Graph 기반의 데이터 구조화</strong>를 통해 법률 정보 간의 논리적 관계를 명시적으로 표현하고, <br>이를 바탕으로 한 지능형 검색 시스템 구축을 제안 합니다.</p>
                 </div>
             </div>
         </div>
@@ -586,7 +1509,215 @@
                 </div>
             </div>
 
-            <div class="expertise-section fade-in">
+            <!-- AI 대화 방식 3시스템 비교 -->
+            <div class="example-section fade-in">
+                <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 1rem;">AI 대화 방식 3시스템 비교</h3>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem;">동일한 질문에 대한 각 시스템의 응답 차이를 확인해보세요</p>
+
+                <div class="three-column-comparison">
+                    <!-- 기존 법률똑똑이 -->
+                    <div class="chat-wrapper">
+                        <div class="chat-container current-system">
+                            <div class="chat-header current-header">
+                                <h4>법률똑똑이</h4>
+                            </div>
+                            <div class="chat-messages">
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>안녕하세요</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">법률똑똑이</div>
+                                        <p>안녕하세요! 법률은 질의하신 사안과 정확하게 일치하는 사례가 아닙니다.</p>
+                                        <p style="margin-top: 0.5rem;">이는 참고용으로만 사용하시고 개별적인 사안과 관련하여 구체적인 상담이 필요한 경우에는 반드시 공단을 방문하거나 전화상담(☎국번없이 132)을 통해 상담하시기 바랍니다.</p>
+
+                                        <div style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 10px;">
+                                            <p><strong>원하시는 법률상담은 아래 메뉴를 선택해주세요:</strong></p>
+                                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                                                <li style="padding: 0.5rem 0;">📋 주택·상가임대차</li>
+                                                <li style="padding: 0.5rem 0;">⚖️ 주택임대차</li>
+                                                <li style="padding: 0.5rem 0;">💰 임대차 기간 및 종료에 관한 분쟁</li>
+                                                <li style="padding: 0.5rem 0;">📄 1.임대차의 존속기간</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>1. 계약으로 존속기간을 정하는 경우</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">법률똑똑이</div>
+                                        <p>주택임대차보호법 제4조 제1항에 따라, 임대차기간을 2년 미만으로 약정한 경우에도 임차인은 2년의 최소 주거안정기간을 보호받을 수 있습니다.</p>
+                                        <p style="margin-top: 0.5rem;">그러나, 임차인이 2년 미만의 약정기간이 유효함을 주장하면 해당 약정이 유효하며, 이에 따라 보증금 반환을 청구할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="system-issues">
+                                <h5>❌ 문제점</h5>
+                                <ul>
+                                    <li>복잡한 메뉴 선택 방식</li>
+                                    <li>획일적 답변 패턴</li>
+                                    <li>맥락 파악 불가</li>
+                                    <li>긴 면책 조항</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Help law -->
+                    <div class="chat-wrapper">
+                        <div class="chat-container helplaw-system">
+                            <div class="chat-header helplaw-header">
+                                <h4>Help law</h4>
+                            </div>
+                            <div class="chat-messages">
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>임대차 계약에 대해 알고 싶습니다.</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">Help law</div>
+                                        <p>임대차계약에 대한 주요 내용은 다음과 같습니다.</p>
+
+                                        <div style="margin-top: 1rem; padding: 1rem; background: #e8f0fe; border-radius: 10px;">
+                                            <p><strong>임대차분쟁조정:</strong> 주택 또는 상가의 임대차와 관련된 분쟁을 해결하기 위해 임차인과 임대인 모두 신청할 수 있는 조정 절차가 있습니다.</p>
+                                            <p style="margin-top: 1rem;"><strong>조정신청 방법:</strong> 웹사이트, 방문, 우편 또는 팩스 중 선택할 수 있으며, 임차인과 임대인 모두 신청 가능합니다.</p>
+                                            <p style="margin-top: 1rem;"><strong>수수료 및 면제:</strong> 조정 신청 시 조정 목적에 따라 수수료가 부과되며, 특정 조건을 충족하면 무료로 진행할 수 있습니다.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>수수료 및 면제에서 특정 조건을 충족하면 무료로 진행된다고 하는데, 특정 조건에 대해 설명해주세요</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">Help law</div>
+                                        <p>수수료 면제에 대한 조건은 다음과 같습니다:</p>
+                                        <ul style="margin-top: 1rem; padding-left: 1rem;">
+                                            <li>우선변제 임차인: 「주택임대차보호법」 제8조에 따라 우선변제를 받을 수 있는 임차인</li>
+                                            <li>국민기초생활 보장법 수급자</li>
+                                            <li>독립유공자 및 그 유족</li>
+                                            <li>국가유공자 및 그 유족</li>
+                                            <li>고엽제후유의증 환자</li>
+                                            <li>참전유공자</li>
+                                            <li>5·18민주유공자 및 그 유족</li>
+                                            <li>특수임무수행자 및 그 유족</li>
+                                            <li>의사상자 및 의사자유족</li>
+                                            <li>한부모가족지원법 지원대상자</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="system-issues">
+                                <h5>❌ 문제점</h5>
+                                <ul>
+                                    <li>표면적 정보만 제공</li>
+                                    <li>상황별 맞춤 불가</li>
+                                    <li>단발성 응답</li>
+                                    <li>이전 대화 연관 불가</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 차세대 시스템 -->
+                    <div class="chat-wrapper">
+                        <div class="chat-container improved-system">
+                            <div class="chat-header improved-header">
+                                <h4>차세대 One-Stop 법률구조서비스</h4>
+                            </div>
+                            <div class="chat-messages">
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>임대차계약에 대해 알고 싶습니다.</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">One-Stop 법률구조서비스</div>
+                                        <p>네, 임대차계약에 대해 도와드리겠습니다.<br>
+                                            혹시 임대인(집주인)이신가요, 아니면 임차인(세입자)이신가요?</p>
+                                    </div>
+                                </div>
+
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>임차인입니다</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">One-Stop 법률구조서비스</div>
+                                        <p>알겠습니다. 임차인으로서 어떤 점이 어려우신가요?</p>
+                                    </div>
+                                </div>
+
+                                <div class="message user">
+                                    <div class="message-bubble">
+                                        <p>지금 살고 있는 집을 1년 전에 빌렸는데, 집주인이 계약기간이 끝났다며 집을 비워주거나 아니면 보증금을 올려달라고 요구합니다.</p>
+                                    </div>
+                                </div>
+
+                                <div class="message ai">
+                                    <div class="message-bubble">
+                                        <div class="message-label">One-Stop 법률구조서비스</div>
+                                        <p><strong>네, 법규정을 통해 답변드리겠습니다.</strong></p>
+
+                                        <div class="info-box">
+                                            <p><strong>📋 주택임대차보호법 제4조</strong></p>
+                                            <p style="margin-top: 0.5rem; font-style: italic;">"기간을 정하지 아니하거나 2년 미만으로 정한 임대차는 그 기간을 2년으로 본다."</p>
+                                        </div>
+
+                                        <div class="action-box">
+                                            <p><strong>💡 결론 및 대응방안</strong></p>
+                                            <p style="margin-top: 0.5rem;">임차인은 임대인에게 <strong>임대차계약기간이 아직 1년 남아있음</strong>을
+                                                이유로 임대인의 요구에 따르지 않을 수 있습니다.</p>
+                                            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                                                <strong>근거:</strong> 주택임대차보호법 제4조제1항, 대법원 2001. 9. 25. 선고 2000다24078 판결<br>
+                                                <strong>참조:</strong> 법률구조공단 플랫폼 > 법률상담사례 > 1년약정의 주택임대차.....(생략)
+                                            </p>
+                                        </div>
+                                        <div class="contact-box">
+                                            <p><strong>📞 추가 상담이 필요하신가요?</strong><br>
+                                                법률구조공단 ☎132 (무료)<br>
+                                                www.klac.or.kr
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="system-improvements">
+                                <h5>✅ 개선사항</h5>
+                                <ul>
+                                    <li>개인화된 상담</li>
+                                    <li>근거 기반 답변</li>
+                                    <li>종합적 해결책</li>
+                                    <li>능동적 질문</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expertise-section fade-in" style="margin-top: 4rem;">
                 <h3 style="text-align: center; color: var(--primary-color); margin-bottom: 3rem;">🔧 자치법연구원의 구조화 전문성</h3>
                 
                 <div class="expertise-grid">
@@ -610,6 +1741,8 @@
             </div>
         </div>
     </section>
+
+
 
     <style>
         /* 데이터 구조화 섹션 스타일 */
@@ -1631,6 +2764,20 @@
                                     <p>저작권 협상 및 기관 간 협력을 통한 전문 법률 콘텐츠 확보</p>
                                 </div>
                             </div>
+                            <div class="expertise-item">
+                                <div class="item-icon">⚖️</div>
+                                <div>
+                                    <h5>법령 해석 및 분석 전문성</h5>
+                                    <p>다양한 법령의 상호 연관성 분석 및 실무적 해석 능력</p>
+                                </div>
+                            </div>
+                            <div class="expertise-item">
+                                <div class="item-icon">🌐</div>
+                                <div>
+                                    <h5>정부기관 협력 네트워크</h5>
+                                    <p>법제처, 대법원 등 핵심 기관과의 기존 협력 관계 및 신뢰도 확보</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1717,7 +2864,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <h2>🏢 포이 회사 소개</h2>
-                <p>데이터 구조화 및 생성형 AI 분야의 전문 기업</p>
+                <p>데이터 인텔리전스 및 AI 솔루션 전문 기업</p>
             </div>
 
             <div class="company-capabilities fade-in">
@@ -1728,9 +2875,9 @@
                         <div class="capability-icon">🔗</div>
                         <h4>데이터 구조화 및 지능형 분석</h4>
                         <ul>
-                            <li>대규모 비정형 데이터 구조화 (텍스트, 이미지, 센서 데이터)</li>
-                            <li>데이터 관계 모델링</li>
-                            <li>비지도학습 기반 패턴 발견 및 이상 탐지</li>
+                            <li>Knowledge Graph 구축 및 추론</li>
+                            <li>실시간 데이터 파이프라인 구축</li>
+                            <li>반응형 데이터 대시보드</li>
                         </ul>
                     </div>
                     
@@ -1738,9 +2885,9 @@
                         <div class="capability-icon">🤖</div>
                         <h4>생성형 AI 및 자연어 처리</h4>
                         <ul>
-                            <li>RAG(Retrieval-Augmented Generation) 시스템 구축</li>
-                            <li>대화형 AI 및 자동화된 콘텐츠 생성</li>
-                            <li>도메인 특화 언어모델 파인튜닝</li>
+                            <li>고급 RAG 시스템 구축 (Graph, Multi-Modal)</li>
+                            <li>의도 분류 및 문맥 인식 챗봇 개발</li>
+                            <li>시맨틱 검색 엔진 구축</li>
                         </ul>
                     </div>
                     
@@ -1750,7 +2897,7 @@
                         <ul>
                             <li>스트리밍 데이터 실시간 분석 시스템</li>
                             <li>클라우드 네이티브 아키텍처 설계</li>
-                            <li>의료·산업 분야 전문 AI 솔루션 개발</li>
+                            <li>의료·법률 분야 전문 SaaS 개발</li>
                         </ul>
                     </div>
                 </div>
@@ -1765,7 +2912,7 @@
                         <div class="project-content">
                             <h4>서울아산병원 CDE 프로젝트</h4>
                             <div class="project-details">
-                                <p><strong>배경:</strong> 신경과 진료 진단 양식 표준화 연구 프로젝트</p>
+                                <p><strong>배경:</strong> 신경과 진료 진단 데이터 구조화 및 표준화 연구 프로젝트</p>
                                 <p><strong>데이터 구조화:</strong> MRI 진단 데이터 표준 양식 설계 및 구조화</p>
                                 <p><strong>AI 적용:</strong> 생성형 AI 직접 학습을 통한 MRI 판독 AI 개발</p>
                                 <p><strong>성과:</strong> 실제 의료진 사용 가능한 판독 AI 구현, 논문 작성 진행 중</p>
@@ -1795,9 +2942,9 @@
                             <h4>정부지원사업 공고 수집 및 검색 시스템</h4>
                             <div class="project-details">
                                 <p><strong>배경:</strong> 다양한 정부기관 지원사업 정보 통합 검색 플랫폼</p>
-                                <p><strong>데이터 구조화:</strong> 서로 다른 구조의 공고 데이터를 통일된 형태로 구조화</p>
+                                <p><strong>데이터 구조화:</strong> 지식그래프 기반 공고 연관성 구조화</p>
                                 <p><strong>AI 적용:</strong> 생성형 AI를 통한 공고 내용 분석 및 자동 구조화</p>
-                                <p><strong>성과:</strong> 다중 기관 데이터 통합으로 사용자 맞춤형 정보 제공 시스템 완성</p>
+                                <p><strong>성과:</strong> 다중 데이터 통합으로 사용자 맞춤형 정보 제공 시스템 개발</p>
                             </div>
                         </div>
                         <div class="project-image">
